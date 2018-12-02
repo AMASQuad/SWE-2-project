@@ -7,10 +7,11 @@ import { HomePage } from '../pages/home/home';
 import { CategoriesPage } from '../pages/categories/categories';
 import { FaqPage } from '../pages/faq/faq';
 import { LoginPage } from '../pages/login/login';
-import { SignUpPage } from '../pages/sign-up/sign-up';
+
 import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
 import { AngularFireModule } from 'angularfire2'; // for db
 import { AngularFireDatabaseModule} from 'angularfire2/database'; // for db
+import { AccTypePage } from '../pages/acc-type/acc-type';
 //import { AnswerSeqQuestionPage } from '../pages/answer-seq-question/answer-seq-question';
 //i made it lazy load
 
@@ -24,8 +25,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CategoriesPage,
     FaqPage,
     LoginPage,
-    SignUpPage,
-    ForgotPassPage
+    ForgotPassPage,
+    AccTypePage
     //AnswerSeqQuestionPage
   ],
   imports: [
@@ -49,8 +50,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CategoriesPage,
     FaqPage,
     LoginPage,
-    SignUpPage,
-    ForgotPassPage
+    ForgotPassPage,
+    AccTypePage
     //AnswerSeqQuestionPage
   ],
   providers: [
