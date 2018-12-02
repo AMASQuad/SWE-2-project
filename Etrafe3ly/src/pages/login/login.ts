@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ForgotPassPage } from '../forgot-pass/forgot-pass';
-
 /**
  * Generated class for the LoginPage page.
  *
@@ -32,4 +31,5 @@ goToForgotPass(){
 goToSignUp(){
   this.navCtrl.push('AccTypePage');
 }
+
 }
