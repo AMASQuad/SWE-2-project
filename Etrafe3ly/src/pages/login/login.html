@@ -1,0 +1,64 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-header>
+
+  <ion-navbar color="ourColor">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<!-- this contains the login input fields -->
+    <ion-list>
+
+        <ion-item>
+          <ion-label floating>E-mail</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </ion-list>
+<!-- end of login input fields -->
+
+<!-- this div contains the login button and the forgot password buttons -->
+<div style="text-align:center;">
+
+<!-- login button -->
+<!-- the log in button should check if the e-mail and password are correct -->
+<!-- if they are correct he should login and transfer him to the home page -->
+<!-- if they are not correct it should show an alert saying e-mail or password are incorrect -->
+        <button style="width:50%;" ion-button>login</button>
+<!-- end of login button -->
+
+<!-- forgot password button -->
+        <button clear ion-button (click)="goToForgotPass()">Forgot password!</button>
+<!-- end of forgot password button -->
+</div>
+<!-- end of the dive conatining the login and forgot password buttons -->
+
+<!-- if the user doesn't have an account -->
+        <ion-label class="my-label">Don't have an account!
+          <div style="text-align: center;">
+          <button (click)="goToSignUp()" clear style="width:50%; font-size: 16px;" ion-button color="ourColor">
+            Sign up
+          </button>
+            </div>
+          </ion-label>
+<!-- end of if the user doesn't have an account -->
+
+</ion-content>

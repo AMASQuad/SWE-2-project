@@ -1,0 +1,159 @@
+<!--
+  Generated template for the SignUpPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="ourColor">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Sign up</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<!-- sign up fields -->
+    <ion-list>
+
+<!-- first name -->
+        <ion-item>
+          <ion-label floating>First name</ion-label>
+          <ion-input type="text" [(ngModel)]="newLawyer.firstName"></ion-input>
+        </ion-item>
+      
+<!-- last name -->
+        <ion-item>
+          <ion-label floating> Last name</ion-label>
+          <ion-input type="text" [(ngModel)]="newLawyer.lastName"></ion-input>
+        </ion-item>
+      
+<!-- e-mail -->
+        <ion-item>
+            <ion-label floating>E-mail</ion-label>
+            <ion-input type="text" [(ngModel)]="newLawyer.email"></ion-input>
+          </ion-item>
+
+<!-- password -->
+          <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="Password" [(ngModel)]="newLawyer.password"></ion-input>
+            </ion-item>
+
+<!-- confirm password -->
+            <ion-item>
+                <ion-label floating>Confirm password</ion-label>
+                <ion-input type="Password"></ion-input>
+              </ion-item>
+
+<!-- choosing security question -->
+                  <ion-item>
+                    <ion-label floating>Security question</ion-label>
+                    <ion-select [(ngModel)]="newLawyer.secQuestion">
+                      <ion-option value="What is your favourite singer?">What is your favourite singer?</ion-option>
+                      <ion-option value="What is your favourite city?">What is your favourite city?</ion-option>
+                      <ion-option value="What is your favourite uncle?">What is your favourite uncle?</ion-option>
+                      <ion-option value="What is your favourite Airline?">What is your favourite Airline?</ion-option>
+                    </ion-select>
+                  </ion-item>
+
+<!-- writing security question answer -->
+            <ion-item>
+                <ion-label floating>Answer</ion-label>
+                <ion-input type="text" [(ngModel)]="newLawyer.secAns"></ion-input>
+              </ion-item>
+
+<!-- phone number -->
+              <ion-item>
+                  <ion-label floating>Phone number</ion-label>
+                  <ion-input type="tel" [(ngModel)]="newLawyer.phone"></ion-input>
+                </ion-item>
+
+<!-- national ID -->
+              <ion-item>
+                    <ion-label floating>National ID</ion-label>
+                    <ion-input type="tel" [(ngModel)]="newLawyer.nationalID"></ion-input>
+                </ion-item>
+
+<!-- gender selection -->
+                <ion-item>
+                    <ion-label>Gender</ion-label>
+                    <ion-select [(ngModel)]="newLawyer.gender">
+                      <ion-option value="female">Female</ion-option>
+                      <ion-option value="male">Male</ion-option>
+                      <ion-option value="other">Other</ion-option>
+                    </ion-select>
+                  </ion-item>
+
+<!-- birth date -->
+                  <ion-item>
+                      <ion-label>Birth date</ion-label>
+                      <ion-datetime displayFormat="D, MMMM YYYY" [(ngModel)]="newLawyer.birthDate" ></ion-datetime>
+                    </ion-item>
+
+<!-- account type (lawyer or user) -->
+                  <ion-item>
+                        <ion-label>Account type</ion-label>
+                        <ion-select>
+                          <ion-option value="user">User</ion-option>
+                          <ion-option value="lawyer">Lawyer</ion-option>
+                        </ion-select>
+                    </ion-item>
+                  
+<!-- terms and policies agreement -->
+                    <ion-item>
+                        <ion-label>I agree on all <a href="www.google.com">erms and polices</a></ion-label>
+                        <ion-checkbox color="dark" checked="true"></ion-checkbox>
+                      </ion-item>
+
+      </ion-list>
+<!-- end of the normal user input fields -->
+
+<!-- start of the fields required from the lawyer when he choose tha lawyer account type -->
+      <ion-list>
+        <ion-item>
+          <ion-label style="color:#f20d0d">Only fill if you are a lawyer</ion-label>
+        </ion-item>
+        
+<!-- choosing degree of enrollment -->
+        <ion-item>
+            <ion-label>Degree of enrollment</ion-label>
+            <ion-select [(ngModel)]="newLawyer.degreeOfEnrollment">
+              <ion-option value="General Schedule">General Schedule</ion-option>
+              <ion-option value="Primary">Primary</ion-option>
+              <ion-option value="High Appeal and State Council">High Appeal and State Council</ion-option>
+              <ion-option value="Veto">Veto</ion-option>
+            </ion-select>
+          </ion-item>
+        
+<!-- office address -->
+        <ion-item>
+              <ion-label floating>Address</ion-label>
+              <ion-input type="text" [(ngModel)]="newLawyer.address"></ion-input>
+            </ion-item>
+          
+<!-- hour rate -->
+            <ion-item>
+                <ion-label floating>Hour rate (Egyptian pound)</ion-label>
+                <ion-input type="number" [(ngModel)]="newLawyer.hourRate"></ion-input>
+              </ion-item>
+      </ion-list>
+
+<!-- bio text area -->
+      <textarea placeholder="Bio" [(ngModel)]="newLawyer.bio" rows="5" style="margin-left: 5%;display:block; font-size: 16px; width: 95%"></textarea>
+      
+<!-- sign up button -->
+<!-- this button will check if all the fields are complete
+in case of the user account type it will be without the lawyers info -->
+<!-- if the data is complete and valid then it will register the user then login -->
+<!-- if the data is not complete it will show alert missing data -->
+      <div style="text-align:center; margin-top:5%; margin-bottom:5%;">
+        <button (click)="registerLawyer()" style="width:50%;" ion-button>Sign up</button>
+      </div>
+<!-- end of sign up page -->
+ </ion-content>
