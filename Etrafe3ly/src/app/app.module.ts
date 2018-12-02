@@ -16,6 +16,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database'; // for db
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FIREBASE_CONFIG } from './app.firebase.config';
 
 @NgModule({
   declarations: [
@@ -32,14 +33,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     //for database
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyCvWuxvtDa8zi6Ku09J25QlE_HlXyPvcgU",
-      authDomain: "etrafe3ly.firebaseapp.com",
-      databaseURL: "https://etrafe3ly.firebaseio.com",
-      projectId: "etrafe3ly",
-      storageBucket: "etrafe3ly.appspot.com",
-      messagingSenderId: "639620565058"
-    }),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
