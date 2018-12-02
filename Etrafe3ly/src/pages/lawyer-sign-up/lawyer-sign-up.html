@@ -96,26 +96,15 @@
                       <ion-datetime displayFormat="D, MMMM YYYY" [(ngModel)]="newLawyer.birthDate" ></ion-datetime>
                     </ion-item>
 
-<!-- account type (lawyer or user) -->
-                  <ion-item>
-                        <ion-label>Account type</ion-label>
-                        <ion-select>
-                          <ion-option value="user">User</ion-option>
-                          <ion-option value="lawyer">Lawyer</ion-option>
-                        </ion-select>
-                    </ion-item>
-                  
 <!-- terms and policies agreement -->
                     <ion-item>
-                        <ion-label>I agree on all <a href="www.google.com">erms and polices</a></ion-label>
+                        <ion-label>I agree on all <a href="www.google.com">Terms and polices</a></ion-label>
                         <ion-checkbox color="dark" checked="true"></ion-checkbox>
                       </ion-item>
 
-      </ion-list>
 <!-- end of the normal user input fields -->
 
 <!-- start of the fields required from the lawyer when he choose tha lawyer account type -->
-      <ion-list>
         <ion-item>
           <ion-label style="color:#f20d0d">Only fill if you are a lawyer</ion-label>
         </ion-item>

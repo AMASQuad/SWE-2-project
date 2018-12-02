@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SignUpPage } from '../sign-up/sign-up';
 
 
 /**
@@ -26,7 +25,7 @@ export class ForgotPassPage {
 
 // this function transfer the user to the sign up page
   goToSignUp(){
-    this.navCtrl.push(SignUpPage);
+    this.navCtrl.push('AccTypePage');
   }
 
 // this function transfer the user to the sequrity question page

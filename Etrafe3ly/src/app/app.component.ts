@@ -7,7 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { CategoriesPage } from '../pages/categories/categories';
 import { FaqPage } from '../pages/faq/faq';
 import { LoginPage } from '../pages/login/login';
-import { SignUpPage } from '../pages/sign-up/sign-up';
+import { AccTypePage } from '../pages/acc-type/acc-type';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +28,7 @@ export class MyApp {
       { title: 'Categories', component: CategoriesPage },
       { title: 'FAQ', component: FaqPage },
       { title: 'Login', component: LoginPage },
-      { title: 'Sign up', component: SignUpPage}
+      { title: 'Sign up', component: AccTypePage}
     ];
 
   }
