@@ -30,10 +30,7 @@ export class HomePage {
         }).present();
       }
         else {
-          this.toastCTRL.create({
-            message : `This account is not registered`,
-            duration : 3000
-          }).present();
+          
         }
     });
   }
