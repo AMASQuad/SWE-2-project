@@ -11,4 +11,8 @@ export class HomePage {
 
   }
 
+  //temporary function to be able to access the profile page
+  goToProfile(){
+    this.navCtrl.push('LawyerProfileTabsPage');
+  }
 }
