@@ -21,5 +21,6 @@ export class LawyerProfilePage {
   ionViewDidLoad() {
     
   }
-
+  userData = this.navParams.data;
+  
 }

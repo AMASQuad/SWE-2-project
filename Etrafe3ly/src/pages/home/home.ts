@@ -22,6 +22,9 @@ export class HomePage {
   loggedIn;
   dbUserData:FirebaseObjectObservable<any>;
   ionViewDidLoad() {
+    console.log(this.afAuth.auth.currentUser);
+    console.log(this.navParams.data);
+   
     this.subscription = this.afAuth.authState.subscribe( (data) =>{
       if(data && data.email && data.uid){
         this.userData = data;

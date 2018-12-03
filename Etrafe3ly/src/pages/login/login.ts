@@ -41,11 +41,14 @@ goToForgotPass(){
 goToSignUp(){
   this.navCtrl.push('AccTypePage');
 }
+
+  //Login
   async login(info:person){
     try {
+      const usertoken = this.user;
       const result = this.afAuth.auth.signInWithEmailAndPassword(info.email,info.password);
       if(result){
-      this.navCtrl.setRoot(HomePage,result); //to set page home
+      this.navCtrl.setRoot(HomePage,{result,usertoken}); //to set page home
     }
       else {
         alert('user not exists'); //create toast
