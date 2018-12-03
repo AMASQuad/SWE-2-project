@@ -19,19 +19,18 @@ export class HomePage {
   //attributes
   subscription;
   userData;
+  loggedIn;
   dbUserData:FirebaseObjectObservable<any>;
   ionViewDidLoad() {
     this.subscription = this.afAuth.authState.subscribe( (data) =>{
       if(data && data.email && data.uid){
         this.userData = data;
+        this.loggedIn = true;
         this.toastCTRL.create({
           message : `welcome  ${data.email},`,
           duration : 3000
         }).present();
       }
-        else {
-          
-        }
     });
   }
     
@@ -41,9 +40,7 @@ export class HomePage {
     this.afAuth.auth.signOut();
   }
 
-  getUserDataFromDatabase(){
-    this.navParams.data.uid
-  }
+  
   
   //this function is here just so i can reach the profile page
   goToProfile(){
