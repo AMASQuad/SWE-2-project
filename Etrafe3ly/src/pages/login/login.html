@@ -25,12 +25,12 @@
 
         <ion-item>
           <ion-label floating>E-mail</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input type="text" [(ngModel)]="userInfo.email"></ion-input>
         </ion-item>
       
         <ion-item>
           <ion-label floating>Password</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input type="password" [(ngModel)]="userInfo.password"></ion-input>
         </ion-item>
       </ion-list>
 <!-- end of login input fields -->
@@ -42,7 +42,7 @@
 <!-- the log in button should check if the e-mail and password are correct -->
 <!-- if they are correct he should login and transfer him to the home page -->
 <!-- if they are not correct it should show an alert saying e-mail or password are incorrect -->
-        <button style="width:50%;" ion-button>login</button>
+        <button style="width:50%;" ion-button (click)='login(userInfo)'>login</button>
 <!-- end of login button -->
 
 <!-- forgot password button -->
