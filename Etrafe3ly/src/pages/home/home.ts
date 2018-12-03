@@ -52,4 +52,8 @@ export class HomePage {
     this.navCtrl.setRoot('page');
   }
   
+  //this function is here just so i can reach the profile page
+  goToProfile(){
+    this.navCtrl.push('LawyerProfileTabsPage');
+  }
 }
