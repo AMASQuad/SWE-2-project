@@ -47,10 +47,6 @@ export class HomePage {
   getUserDataFromDatabase(){
     this.navParams.data.uid
   }
-  goToProfile(accType){
-    if(this.navParams.data.uid)
-    this.navCtrl.setRoot('page');
-  }
   
   //this function is here just so i can reach the profile page
   goToProfile(){
