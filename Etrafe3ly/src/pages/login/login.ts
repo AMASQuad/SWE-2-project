@@ -4,6 +4,9 @@ import { ForgotPassPage } from '../forgot-pass/forgot-pass';
 import { person } from '../../modules/person.interface';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../../pages/home/home';
+import firebase from 'firebase/app';
+import { FirebaseObjectObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the LoginPage page.
  *
@@ -20,9 +23,11 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private afAuth:AngularFireAuth) {
+      this.user = afAuth.authState; // only triggered on sign-in/out (for old behavior use .idToken)
   }
   //attributes
-    userInfo = {} as person;
+    userInfo = {} as person; // to get data from html template
+    user: Observable<firebase.User>;  // to be triggered on sign-in/out
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
@@ -49,6 +54,5 @@ goToSignUp(){
   catch(e){
       console.log(e);
   }
-  
   
   }}
