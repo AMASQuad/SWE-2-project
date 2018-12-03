@@ -42,8 +42,13 @@ export class HomePage {
 
   
   
-  //this function is here just so i can reach the profile page
+  //this function is here just so i can reach the lawyer profile page
   goToProfile(){
     this.navCtrl.push('LawyerProfileTabsPage');
+  }
+
+//this function is here just so i can reach the user profile page
+  goToUserProfile(){
+    this.navCtrl.push('UserProfileTabsPage');
   }
 }
