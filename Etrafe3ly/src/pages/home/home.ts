@@ -44,6 +44,6 @@ export class HomePage {
   
   //this function is here just so i can reach the profile page
   goToProfile(){
-    this.navCtrl.push('LawyerProfileTabsPage');
+    this.navCtrl.push('LawyerProfileTabsPage',this.navParams.data);
   }
 }

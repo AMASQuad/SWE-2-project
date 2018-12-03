@@ -19,7 +19,7 @@ export class LawyerProfilePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LawyerProfilePage');
+    
   }
 
 }

@@ -36,9 +36,9 @@ goToForgotPass(){
 goToSignUp(){
   this.navCtrl.push('AccTypePage');
 }
-  async login(userInfo:person){
+  async login(info:person){
     try {
-      const result = this.afAuth.auth.signInWithEmailAndPassword(userInfo.email,userInfo.password);
+      const result = this.afAuth.auth.signInWithEmailAndPassword(info.email,info.password);
       if(result){
       this.navCtrl.setRoot(HomePage,result); //to set page home
     }
