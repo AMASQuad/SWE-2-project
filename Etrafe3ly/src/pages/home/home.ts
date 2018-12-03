@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { person } from '../../modules/person.interface';
-import { lawyer } from '../../modules/lawyer.class';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'page-home',
@@ -11,7 +10,7 @@ import { lawyer } from '../../modules/lawyer.class';
 export class HomePage {
 
   constructor(public navCtrl: NavController,private afAuth:AngularFireAuth , private toastCTRL:ToastController,
-    private navParams:NavParams) {
+    private navParams:NavParams,private database:AngularFireDatabase) {
       if(this.navParams.data){
         this.subscription = navParams;
       }
@@ -19,9 +18,9 @@ export class HomePage {
   }
   //attributes
   subscription;
-  userData = {};
+  userData;
+  dbUserData:FirebaseObjectObservable<any>;
   ionViewDidLoad() {
-    console.log(this.navParams.data.uid);
     this.subscription = this.afAuth.authState.subscribe( (data) =>{
       if(data && data.email && data.uid){
         this.userData = data;
@@ -37,13 +36,20 @@ export class HomePage {
           }).present();
         }
     });
+  }
     
-    }
     
   
   logoutUser(){
-    this.subscription.unsubscribe();
-    this.navParams.data = {};
+    this.afAuth.auth.signOut();
+  }
+
+  getUserDataFromDatabase(){
+    this.navParams.data.uid
+  }
+  goToProfile(accType){
+    if(this.navParams.data.uid)
+    this.navCtrl.setRoot('page');
   }
   
 }
