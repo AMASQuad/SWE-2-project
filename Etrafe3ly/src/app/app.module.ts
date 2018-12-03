@@ -7,16 +7,17 @@ import { HomePage } from '../pages/home/home';
 import { CategoriesPage } from '../pages/categories/categories';
 import { FaqPage } from '../pages/faq/faq';
 import { LoginPage } from '../pages/login/login';
-
+import { AccTypePage} from '../pages/acc-type/acc-type';
 import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
 import { AngularFireModule } from 'angularfire2'; // for db
 import { AngularFireDatabaseModule} from 'angularfire2/database'; // for db
-import { AccTypePage } from '../pages/acc-type/acc-type';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 //import { AnswerSeqQuestionPage } from '../pages/answer-seq-question/answer-seq-question';
 //i made it lazy load
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FIREBASE_CONFIG } from './app.firebase.config';
 
 @NgModule({
   declarations: [
@@ -33,15 +34,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     //for database
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyCvWuxvtDa8zi6Ku09J25QlE_HlXyPvcgU",
-      authDomain: "etrafe3ly.firebaseapp.com",
-      databaseURL: "https://etrafe3ly.firebaseio.com",
-      projectId: "etrafe3ly",
-      storageBucket: "etrafe3ly.appspot.com",
-      messagingSenderId: "639620565058"
-    }),
-    AngularFireDatabaseModule
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

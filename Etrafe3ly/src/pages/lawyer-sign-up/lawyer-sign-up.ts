@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database';
 import { lawyer } from '../../modules/lawyer.class';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the LawyerSignUpPage page.
@@ -24,7 +25,8 @@ export class LawyerSignUpPage {
   //database
   newLawyerReference:FirebaseListObservable<lawyer[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private database:AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private database:AngularFireDatabase,
+    private afAuth:AngularFireAuth) {
 
     this.newLawyerReference=this.database.list('lawyers');
   }
@@ -34,7 +36,7 @@ export class LawyerSignUpPage {
   }
 
   //lawyer registration function
-  registerLawyer(){
+  pushLawyerToDB(){
 
     //set the type of the account to lawyer
     this.newLawyer.accountType='lawyer';
@@ -42,7 +44,16 @@ export class LawyerSignUpPage {
       this.newLawyerReference.push(this.newLawyer);
       // to clean the form
       this.newLawyer = {} as lawyer; 
-    
+  }
+  async Register(Lawyer:lawyer){
+    try {
+      const result = this.afAuth.auth.createUserWithEmailAndPassword(Lawyer.email,Lawyer.password); 
+      this.pushLawyerToDB();
+      console.log(result);
+    }
+    catch(e){
+      console.log(e);
+    }
   }
 
 }
