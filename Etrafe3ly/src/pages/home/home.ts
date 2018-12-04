@@ -39,5 +39,9 @@ logout(){
   this.loggedin = false;
 }
 
+//cat
+goToCat(){
+  this.navCtrl.push('CategoriesRetrievalPage')
+}
 
 }
