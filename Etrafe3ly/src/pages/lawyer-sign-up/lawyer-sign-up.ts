@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { lawyer } from '../../modules/lawyer';
+import firebase from 'firebase';
+import { userRef, lawyerRef } from '../../modules/database.nodes';
 
-import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database';
-import { lawyer } from '../../modules/lawyer.class';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the LawyerSignUpPage page.
@@ -20,40 +20,24 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class LawyerSignUpPage {
 
   //creating object from lawyer class
-  newLawyer = {} as lawyer;
+  newLawyer = new lawyer();
 
-  //database
-  newLawyerReference:FirebaseListObservable<lawyer[]>;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private database:AngularFireDatabase,
-    private afAuth:AngularFireAuth) {
-
-    this.newLawyerReference=this.database.list('lawyers');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LawyerSignUpPage');
   }
-
   //lawyer registration function
-  pushLawyerToDB(){
-
-    //set the type of the account to lawyer
-    this.newLawyer.accountType='lawyer';
-    // this will push to the database
-      this.newLawyerReference.push(this.newLawyer);
-      // to clean the form
-      this.newLawyer = {} as lawyer; 
+  lawyerRegister(){
+    const lawyerEmail = firebase.auth().createUserWithEmailAndPassword(this.newLawyer.email,this.newLawyer.password).then((data)=>{
+        this.newLawyer.uid = data.user.uid;
+        this.newLawyer.email = null;
+        this.newLawyer.password = null;
+        firebase.database().ref(lawyerRef).push(this.newLawyer);
+    }).catch((err) => {
+      console.log(err);//handling error
+    })
   }
-  async Register(Lawyer:lawyer){
-    try {
-      const result = this.afAuth.auth.createUserWithEmailAndPassword(Lawyer.email,Lawyer.password); 
-      this.pushLawyerToDB();
-      console.log(result);
-    }
-    catch(e){
-      console.log(e);
-    }
-  }
-
 }

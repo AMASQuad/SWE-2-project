@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, NavParams } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { NavController, NavParams } from 'ionic-angular';
+import firebase from 'firebase';
+
 
 @Component({
   selector: 'page-home',
@@ -9,49 +9,35 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController,private afAuth:AngularFireAuth , private toastCTRL:ToastController,
-    private navParams:NavParams,private database:AngularFireDatabase) {
-      if(this.navParams.data){
-        this.subscription = navParams;
-      }
-    
+  constructor(public navCtrl: NavController,private navParams:NavParams) {
+    if(this.navParams.data){
+      //DBuserData = this.navParams.data;
+      console.log(this.navParams.data)
+    }
   }
   //attributes
-  subscription;
-  userData;
-  loggedIn;
-  dbUserData:FirebaseObjectObservable<any>;
+  userData = this.navParams.data; // recieved data from 
+  loggedin:boolean;
+  userType:string;
+  
   ionViewDidLoad() {
-    console.log(this.afAuth.auth.currentUser);
-    console.log(this.navParams.data);
-   
-    this.subscription = this.afAuth.authState.subscribe( (data) =>{
-      if(data && data.email && data.uid){
-        this.userData = data;
-        this.loggedIn = true;
-        this.toastCTRL.create({
-          message : `welcome  ${data.email},`,
-          duration : 3000
-        }).present();
-      }
-    });
   }
     
-    
-  
-  logoutUser(){
-    this.afAuth.auth.signOut();
-  }
-
-  
-  
   //this function is here just so i can reach the lawyer profile page
   goToProfile(){
-    this.navCtrl.push('LawyerProfileTabsPage',this.navParams.data);
+    this.navCtrl.push('LawyerProfileTabsPage');
   }
 
 //this function is here just so i can reach the user profile page
   goToUserProfile(){
     this.navCtrl.push('UserProfileTabsPage');
   }
+//Logout
+logout(){
+  firebase.auth().signOut();
+  console.log()
+  this.loggedin = false;
+}
+
+
 }

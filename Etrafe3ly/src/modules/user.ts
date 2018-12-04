@@ -1,8 +1,8 @@
 import { DateTime } from "ionic-angular";
-import { person } from '../modules/person.interface';
-export class user implements person {
+export class user {
 
         //attributes
+        uid:string;
         firstName:string;
         lastName:string;
         email:string;
