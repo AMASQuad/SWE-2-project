@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import firebase from 'firebase' 
 /**
  * Generated class for the CategoriesPage page.
  *
@@ -22,4 +22,21 @@ export class CategoriesPage {
     console.log('ionViewDidLoad CategoriesPage');
   }
 
+  retrieveDataOfLawyers(cat:string) {
+      firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo('Primary').on('value',(data)=>{
+          const recieved = this.snaptoObject(data);
+          console.log(recieved)
+      })
+  }
+
+
+  snaptoObject(snap) { // to get data from db and put it into array
+    let array = [];
+    snap.forEach(element => {
+      let item = element.val();
+      item.key = element.key;
+      array.push(item);
+    });
+    return array[0];
+  }
 }
