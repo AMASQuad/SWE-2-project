@@ -2,8 +2,9 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
 import { ForgotPassPage } from "../forgot-pass/forgot-pass";
 import { HomePage } from "../../pages/home/home";
-import firebase from "firebase/app";
+import firebase from "firebase";
 import { userRef, lawyerRef } from "../../modules/database.nodes";
+
 /**
  * Generated class for the LoginPage page.
  *

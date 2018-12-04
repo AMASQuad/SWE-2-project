@@ -9,7 +9,7 @@ export class LawyerProfilePage {
   
   
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+    console.log(this.navParams.data)
   }
 
   ionViewDidLoad() {
