@@ -21,22 +21,28 @@ export class CategoriesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CategoriesPage');
   }
-  lawyers:any[] = [];
-  retrieveDataOfLawyers(cat:string) {
-      firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(cat).on('value',(data)=>{
-          const recieved = this.snaptoObject(data);
-          this.lawyers.push(recieved)
-      })
-  }
+  //lawyers:any[] = [];
+  //retrieveDataOfLawyers(cat:string) {
+  //    firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(cat).on('value',(data)=>{
+  //        const recieved = this.snaptoObject(data);
+  //        this.lawyers.push(recieved)
+  //    })
+  //}
 
 
-  snaptoObject(snap) { // to get data from db and put it into array
-    let array = [];
-    snap.forEach(element => {
-      let item = element.val();
-      item.key = element.key;
-      array.push(item);
-    });
-    return array[0];
+  //snaptoObject(snap) { // to get data from db and put it into array
+    //let array = [];
+    //snap.forEach(element => {
+      //let item = element.val();
+      //item.key = element.key;
+      //array.push(item);
+    //});
+    //return array[0];
+  //}
+
+  //this function sets the name of the choosen category and change the page to get the lawyers
+  setCat(cat:string){
+    this.navCtrl.push('CategoriesRetrievalPage', cat);
   }
+
 }

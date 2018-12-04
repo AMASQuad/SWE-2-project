@@ -29,35 +29,26 @@
 
 <!-- listing the lawyers categories -->
   <ion-list>
-    <button ion-item (click)="retrieveDataOfLawyers('General Schedule')">
+    <button ion-item (click)="setCat('General Schedule')">
       <ion-icon name="flag"></ion-icon>
       General Schedule
     </button>
 
-      <button ion-item (click)='retrieveDataOfLawyers("Primary")'>
+      <button ion-item (click)="setCat('Primary')">
           <ion-icon name="flag"></ion-icon>
           Primary
         </button>
 
-        <button ion-item (click)="retrieveDataOfLawyers('High Appeal and State Council')">
+        <button ion-item (click)="setCat('High Appeal and State Council')">
             <ion-icon name="flag"></ion-icon>
             High Appeal and State Council
           </button>
 
-          <button ion-item (click)='retrieveDataOfLawyers("Veto")'>
+          <button ion-item (click)='setCat("Veto")'>
               <ion-icon name="flag"></ion-icon>
               veto
             </button>
     </ion-list>
   </ion-card>
-
-  <ion-item *ngFor="let lawyer of this.lawyers">
-    <ion-avatar item-start>
-      <img src="img/avatar-finn.png">
-    </ion-avatar>
-    <h2>{{lawyer.firstName}}</h2>
-    <h3>Don't Know What To Do!</h3>
-    <p>I've had a pretty messed up day. If we just...</p>
-  </ion-item>
 
 </ion-content>

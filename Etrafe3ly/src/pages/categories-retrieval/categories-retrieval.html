@@ -17,13 +17,13 @@
 
 <ion-content padding>
   <!-- this is the ion card that will be generated for each lawyer -->
-    <ion-card>
+    <ion-card *ngFor="let lawyer of this.lawyers">
         <ion-card-header>
                 <img class="lawyerPhoto" src="../../assets/imgs/lawyer.png">
               <!-- here you will display lawyer's name -->
-              <h2 class="lawyerName">Alaa Ahmed</h2>
+              <h2 class="lawyerName">{{lawyer.firstName}}</h2>
               <!-- lawyer rate -->
-              <h2 class="lawyerRate">Rate <ion-icon name="ios-star" color="gold"></ion-icon></h2>
+              <h2 class="lawyerRate">{{lawyer.phone}} <ion-icon name="ios-star" color="gold"></ion-icon></h2>
         </ion-card-header>
         <!-- lawyer bio -->
         <ion-card-content>
