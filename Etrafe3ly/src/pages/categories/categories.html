@@ -51,11 +51,11 @@
     </ion-list>
   </ion-card>
 
-  <ion-item *ngFor="let lawyer of lawyers">
+  <ion-item *ngFor="let lawyer of this.lawyers">
     <ion-avatar item-start>
       <img src="img/avatar-finn.png">
     </ion-avatar>
-    <h2>Finn</h2>
+    <h2>{{lawyer.firstName}}</h2>
     <h3>Don't Know What To Do!</h3>
     <p>I've had a pretty messed up day. If we just...</p>
   </ion-item>

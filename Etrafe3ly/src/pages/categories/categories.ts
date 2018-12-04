@@ -21,11 +21,11 @@ export class CategoriesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CategoriesPage');
   }
-
+  lawyers:any[] = [];
   retrieveDataOfLawyers(cat:string) {
-      firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo('Primary').on('value',(data)=>{
+      firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(cat).on('value',(data)=>{
           const recieved = this.snaptoObject(data);
-          console.log(recieved)
+          this.lawyers.push(recieved)
       })
   }
 
