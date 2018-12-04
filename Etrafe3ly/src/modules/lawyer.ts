@@ -1,6 +1,8 @@
 import { DateTime } from 'ionic-angular';
-export interface person{
-    
+export class lawyer{
+
+    //attributes
+    uid:string;
     firstName:string;
     lastName:string;
     email:string;
@@ -12,5 +14,14 @@ export interface person{
     gender:string;
     birthDate:DateTime;
     accountType:string;
+    degreeOfEnrollment:string;
+    address:string;
+    hourRate:number;
+    bio:string;
+    //rate
+    peopleRated:number;
+    overallRate:number;
+
+    //constant to store data
     
 }
