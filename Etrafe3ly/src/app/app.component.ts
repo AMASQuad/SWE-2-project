@@ -28,7 +28,8 @@ export class MyApp {
       { title: 'Categories', component: CategoriesPage },
       { title: 'FAQ', component: FaqPage },
       { title: 'Login', component: LoginPage },
-      { title: 'Sign up', component: AccTypePage}
+      { title: 'Sign up', component: AccTypePage},
+      { title: 'Logout', component: null}
     ];
 
   }
@@ -45,6 +46,12 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+    if(page.component){
     this.nav.setRoot(page.component);
+  }
+  else{
+    //here is the code of the logout
+    console.log('logout is pressed');
+  }
   }
 }
