@@ -33,7 +33,7 @@ export class LawyerSignUpPage {
   }
   //lawyer registration function
   lawyerRegister(){
-    const lawyerEmail = firebase.auth().createUserWithEmailAndPassword(this.newLawyer.email,this.newLawyer.password).then((data)=>{
+      firebase.auth().createUserWithEmailAndPassword(this.newLawyer.email,this.newLawyer.password).then((data)=>{
         this.newLawyer.uid = data.user.uid;
         this.newLawyer.email = null;
         this.newLawyer.password = null;

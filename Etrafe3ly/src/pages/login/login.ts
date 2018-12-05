@@ -35,42 +35,7 @@ export class LoginPage {
   goToSignUp() {
     this.navCtrl.push("AccTypePage");
   }
-
-  //Login
-  login() {
-    firebase.auth().signInWithEmailAndPassword(this.userInfo.email, this.userInfo.password)
-      .then(data => {
-        const userData: any = {};
-        console.log(data.user.uid);
-        if (data) {
-          const uid=data.user.uid;
-          firebase.database().ref(userRef).orderByChild("uid").equalTo(data.user.uid).on("value", data => {
-              //search in db and retrieve data
-              // console.log(data);
-              const user = this.snaptoObject(data);
-              console.log(user);//recieved object
-
-              this.navCtrl.setRoot(HomePage,user).then(()=>{
-                this.toastCtrl.create({
-                  message:`Welcome ${user.firstName}`
-                }).present()
-              })
-              if (user == null) {
-                firebase.database().ref(lawyerRef).orderByChild("uid").equalTo(uid).on("value", data => {
-                  const user= this.snaptoObject(data);
-                  console.log("lawer")
-                  console.log(user);
-                });
-              }
-            });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  snaptoObject(snap) { // to get data from db and put it into array
+  snaptoObject(snap:any) { // to get data from db and put it into array
     let array = [];
     snap.forEach(element => {
       let item = element.val();
@@ -79,4 +44,69 @@ export class LoginPage {
     });
     return array[0];
   }
+  //-----------------------
+  public recievedData : any = {} //from user
+  //Login
+  searchForUser(uid){
+              
+    firebase.database().ref('Accounts/').orderByChild("uid").equalTo(uid)
+    .on("value", data => {
+    //search in db and retrieve data
+    // console.log(data);
+    const userData = this.snaptoObject(data);
+    this.recievedData = userData; //from user
+    console.log('before If');
+    console.log(userData);
+    console.log(data.key);
+    if(data.key){//check in users
+        //
+          console.log('users table')
+          console.log(userData)
+          this.navCtrl.setRoot(HomePage,userData).then(() =>{
+              this.toastCtrl.create({
+                message : `Welcome ${userData}`
+              }).present()
+          })
+        //
+        }})} // here
+        searchForLawyer(uid){
+          firebase.database().ref('Accounts/').orderByChild("uid").equalTo(uid).on("value", data => {
+            //  
+             const userData = this.snaptoObject(data);
+              console.log(data.key)
+              console.log('lawyers table')
+              console.log(userData)
+              this.navCtrl.setRoot(HomePage,userData).then(()=>{
+                this.toastCtrl.create({
+                  message:`Welcome ${userData.firstName}`
+                }).present()
+              })
+            //
+          })
+        }
+
+  login() {
+    
+    firebase.auth().signInWithEmailAndPassword(this.userInfo.email, this.userInfo.password)
+    .then(data=>{ 
+      const uid = data.user.uid
+      firebase.database().ref(userRef).orderByChild("uid").equalTo(uid).on("value", data => {
+        //  
+         const userData = this.snaptoObject(data);
+          this.navCtrl.setRoot(HomePage,userData).then(()=>{
+            this.toastCtrl.create({
+              message:`Welcome ${userData.firstName}`
+            }).present()
+          })
+        //
+      })
+      
+    
+        
+              }
+  
+          )}
+
+    
 }
+

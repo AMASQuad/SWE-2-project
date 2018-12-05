@@ -21,5 +21,6 @@ export class EditUserProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditUserProfilePage');
   }
+  
 
 }

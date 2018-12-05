@@ -1,2 +1,2 @@
-export const lawyerRef = 'Lawyers'
-export const userRef = 'Users'
+export const lawyerRef = 'Accounts/Lawyers'
+export const userRef = 'Accounts/Users'

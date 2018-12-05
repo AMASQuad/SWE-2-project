@@ -12,6 +12,9 @@
       </button>
   <ion-title>Profile</ion-title>
 </ion-navbar>
+<button ion-button end (click)='deleteAcc(this.navParams.data.uid)'>
+    Delete Account
+</button>
 
 </ion-header>
 
@@ -22,14 +25,13 @@
     <img src="../../assets/imgs/user.png" class="profilePhoto">
     
     <!-- first + last name div using attribute binding-->
-    <div class="name"> Alaa Ahmed amin</div>
+    <div class="name"> Hello , {{this.navParams.data.firstName}}</div>
     </div>
 
        <!-- phone number -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 35%; color: green;">
-    Phone number: here you will show the user's phone number
+    Phone number: {{this.navParams.data.phone}}
   </div>
 
-  <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">National ID: her you will show the national id</div>
-  <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">E-mail: here you will show the e-mail</div>
+  <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">National ID: {{this.navParams.data.nationalID}}</div>
 </ion-content>
