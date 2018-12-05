@@ -45,4 +45,9 @@ export class LawyerProfilePage {
     return avgRate
   }
   rating = this.getRating()
+
+  deleteAcc(uid){
+    firebase.database().ref('/Accounts').orderByChild('uid')
+    .equalTo(uid).ref.remove()
+  }
 }
