@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase' 
+import { ModalController } from 'ionic-angular';
 /**
  * Generated class for the CategoriesRetrievalPage page.
  *
@@ -15,7 +16,7 @@ import firebase from 'firebase'
 })
 export class CategoriesRetrievalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -49,4 +50,9 @@ export class CategoriesRetrievalPage {
     this.retrieveDataOfLawyers(this.navParams.data);
   }
 
+  //search
+  presentModal() {
+    const modal = this.modalCtrl.create('SearchModalPage');
+    modal.present();
+  }
 }
