@@ -26,6 +26,7 @@ export class HomePage {
   ionViewDidLoad() {
   }
     
+<<<<<<< HEAD
   //this function is here just so i can reach the lawyer profile page
   goToProfile(){
     this.navCtrl.push('LawyerProfileTabsPage',this.navParams.data);
@@ -35,6 +36,8 @@ export class HomePage {
   goToUserProfile(){
     this.navCtrl.push('UserProfileTabsPage',this.navParams.data);
   }
+=======
+>>>>>>> 789b1c55649f944cc1200e98acb659ec5e3da8e8
 //Logout
 logout(){
   firebase.auth().signOut();
@@ -42,9 +45,5 @@ logout(){
   this.loggedin = false;
 }
 
-//cat
-goToCat(){
-  this.navCtrl.push('CategoriesRetrievalPage')
-}
 
 }

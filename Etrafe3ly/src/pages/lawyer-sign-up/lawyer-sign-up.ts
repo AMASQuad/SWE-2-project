@@ -39,5 +39,6 @@ export class LawyerSignUpPage {
     }).catch((err) => {
       console.log(err);//handling error
     })
+    console.log('lawyer registered');
   }
 }

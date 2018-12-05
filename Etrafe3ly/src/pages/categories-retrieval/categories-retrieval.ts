@@ -22,4 +22,31 @@ export class CategoriesRetrievalPage {
     console.log('ionViewDidLoad CategoriesRetrievalPage');
   }
 
+  lawyers:any[] = [];
+  retrieveDataOfLawyers(cat:string) {
+      firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(cat).on('value',(data)=>{
+          const recieved = this.snaptoObject(data);
+          this.lawyers.push(recieved)
+      })
+  }
+
+
+  snaptoObject(snap) { // to get data from db and put it into array
+    let array = [];
+    snap.forEach(element => {
+      let item = element.val();
+      item.key = element.key;
+      array.push(item);
+    });
+    return array[0];
+  }
+  
+  ionViewWillEnter(){
+        //test
+        console.log(this.navParams.data);
+
+        //retrieva the data
+    this.retrieveDataOfLawyers(this.navParams.data);
+  }
+
 }
