@@ -33,7 +33,7 @@ newUser = {} as user;
 
   //user registration function
   userRegistration(){
-    const lawyerEmail = firebase.auth().createUserWithEmailAndPassword(this.newUser.email,this.newUser.password).then((data)=>{
+        firebase.auth().createUserWithEmailAndPassword(this.newUser.email,this.newUser.password).then((data)=>{
         this.newUser.uid = data.user.uid;
         this.newUser.email = null;
         this.newUser.password = null;

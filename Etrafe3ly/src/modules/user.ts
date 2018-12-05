@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 import { DateTime } from "ionic-angular";
 export class user {
 
@@ -14,4 +15,19 @@ export class user {
         gender:string;
         birthDate:DateTime;
         accountType:string;
+
+
+        rateLawyer(rateNumber:number,lawyerid,email,pw){ //to rate lawyer
+                
+        firebase.auth().signInWithEmailAndPassword(email,pw).then(()=>{
+                firebase.database().ref('Rating').push({
+                        rate:rateNumber,
+                        emailOfUser:email,
+                        lid: lawyerid
+                })
+        }).catch(err=>{
+                console.log(err)
+        })
+                
+        }
 }

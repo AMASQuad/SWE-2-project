@@ -20,7 +20,7 @@
 <img src="../../assets/imgs/user.png" class="profilePhoto">
 
 <!-- first + last name div using attribute binding-->
-<div class="name"> Hello ,</div> </div>
+<div class="name"> Hello ,{{this.navParams.data.firstName}}</div> </div>
 <!-- Bio div -->
 <div style="font-size:20px; margin-top: 35%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
@@ -34,15 +34,14 @@
 
    <!-- address -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">
-     Address: here you will show the address
+     Address: {{this.navParams.data.address}}
    </div>
 
    <!-- phone number -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">
-     Phone number: here you will show the lawyers phone number
+     Phone number: {{this.navParams.data.phone}}
    </div>
 
    <!-- rating -->
-   <div style="font-size: 18px; font-weight: bold; margin-top: 5%; text-align: center;">Rating</div>
-   <div style="font-size: 18px; margin-top: 3%; text-align: center">here you should show the rating</div>
+   <div style="font-size: 18px; font-weight: bold; margin-top: 5%; text-align: center;" [(ngModel)]="this.rating">Rating</div>
 </ion-content>
