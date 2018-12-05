@@ -66,4 +66,5 @@ export class MyApp {
     console.log('logout is pressed');
   }
   }
+  user_data = {} as any
 }

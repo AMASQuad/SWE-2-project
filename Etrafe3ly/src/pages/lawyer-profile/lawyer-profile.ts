@@ -7,9 +7,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LawyerProfilePage {
   
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(this.navParams.data)
+  constructor(public navCtrl: NavController, public navParams: NavParams,) {
+    console.log(this.navParams.data);
+    
   }
 
   ionViewDidLoad() {

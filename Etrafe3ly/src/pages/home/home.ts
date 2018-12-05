@@ -9,15 +9,16 @@ import firebase from 'firebase';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  udata = {};
+  userData;
   constructor(public navCtrl: NavController,private navParams:NavParams) {
     if(this.navParams.data){
       //DBuserData = this.navParams.data;
-      console.log(this.navParams.data)
-      this.udata = this.navParams.data;
+      //console.log(this.navParams.data)
+      
     }
   }
   //attributes
+  
    // recieved data from 
   loggedin:boolean;
   userType:string;
@@ -27,12 +28,12 @@ export class HomePage {
     
   //this function is here just so i can reach the lawyer profile page
   goToProfile(){
-    this.navCtrl.push('LawyerProfileTabsPage');
+    this.navCtrl.push('LawyerProfileTabsPage',this.navParams.data);
   }
 
 //this function is here just so i can reach the user profile page
   goToUserProfile(){
-    this.navCtrl.push('UserProfileTabsPage');
+    this.navCtrl.push('UserProfileTabsPage',this.navParams.data);
   }
 //Logout
 logout(){

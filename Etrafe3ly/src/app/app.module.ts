@@ -14,7 +14,6 @@ import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { UserDataProvider } from '../providers/user-data/user-data';
 
 @NgModule({
   declarations: [
@@ -45,8 +44,8 @@ import { UserDataProvider } from '../providers/user-data/user-data';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserDataProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    
   ]
 })
 export class AppModule {}
