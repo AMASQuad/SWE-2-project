@@ -11,6 +11,7 @@ import { AccTypePage} from '../pages/acc-type/acc-type';
 import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
 //import { AnswerSeqQuestionPage } from '../pages/answer-seq-question/answer-seq-question';
 //i made it lazy load
+import { Camera } from '@ionic-native/camera';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -44,6 +45,7 @@ import { UserDataProvider } from '../providers/user-data/user-data';
   ],
   providers: [
     StatusBar,
+    Camera,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserDataProvider
