@@ -21,7 +21,7 @@ export class lawyer{
     //rate
     peopleRated:number;
     overallRate:number;
-    profilePic:string;
+
 
     //constant to store data
     

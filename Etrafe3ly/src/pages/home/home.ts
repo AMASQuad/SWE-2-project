@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
+import { ModalController } from 'ionic-angular';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -9,7 +11,7 @@ import firebase from 'firebase';
 
 export class HomePage {
   userData;
-  constructor(public navCtrl: NavController,private navParams:NavParams) {
+  constructor(public navCtrl: NavController,private navParams:NavParams, public modalCtrl:ModalController) {
   
     globalvar = navParams.data
       
@@ -42,5 +44,12 @@ logout(){
 getObject(){
   return globalvar
 }
+
+  //search
+  presentModal() {
+    const modal = this.modalCtrl.create('SearchModalPage');
+    modal.present();
+  }
+
 }
 var globalvar = {};

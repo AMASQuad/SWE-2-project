@@ -34,7 +34,7 @@ export class user {
 
         lawyers:any[] = [];
 searchForLawyer(textData:string) {
-    firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(cat).on('value',(data)=>{
+    firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(textData).on('value',(data)=>{
         const recieved = this.snaptoObject(data);
         this.lawyers.push(recieved)
     })
@@ -51,31 +51,31 @@ snaptoObject(snap) { // to get data from db and put it into array
   return array[0];
 }
 
-constructor(private emailComposer: EmailComposer) { } // will be moved 
+//constructor(private emailComposer: EmailComposer) { } // will be moved 
 
 
 
 //------------------------------------------email function------------------------------
-this.emailComposer.isAvailable().then((available: boolean) =>{
- if(available) {
-   console.log('connection established')
- }
-});
+//this.emailComposer.isAvailable().then((available: boolean) =>{
+ //if(available) {
+   //console.log('connection established')
+ //}
+//});
 
-let email = {
-  to: 'max@mustermann.de',//reciever Email
-  cc: 'erika@mustermann.de',//
-  bcc: ['john@doe.com', 'jane@doe.com'],
-  attachments: [
-  ],
-  subject: 'Reserfation in Etrafe3ly',
-  body: `hello sir, an appointment was reserved by ${this.navParams.data.firstName} and his number is ${this.navParams.data.phone},
-  please contact him`,
-  isHtml: true
-};
+//let email = {
+  //to: 'max@mustermann.de',//reciever Email
+  //cc: 'erika@mustermann.de',//
+  //bcc: ['john@doe.com', 'jane@doe.com'],
+  //attachments: [
+  //],
+  //subject: 'Reserfation in Etrafe3ly',
+  //body: `hello sir, an appointment was reserved by ${this.navParams.data.firstName} and his number is ${this.navParams.data.phone},
+  //please contact him`,
+  //isHtml: true
+//};
 
 // Send a text message using default options
-this.emailComposer.open(email);
+//this.emailComposer.open(email);
 // ---------------------------------
 
 

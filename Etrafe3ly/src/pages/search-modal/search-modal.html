@@ -6,13 +6,18 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>searchModal</ion-title>
+  <ion-navbar color="ourColor">
+    <button (click)="goToHome()" ion-button clear style="color:white;">cancel</button>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let item of items">
+        {{ item }}
+      </ion-item>
+    </ion-list>
 </ion-content>

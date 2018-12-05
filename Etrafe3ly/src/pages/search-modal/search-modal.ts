@@ -22,4 +22,7 @@ export class SearchModalPage {
     console.log('ionViewDidLoad SearchModalPage');
   }
 
+  goToHome(){
+    this.navCtrl.pop();
+  }
 }
