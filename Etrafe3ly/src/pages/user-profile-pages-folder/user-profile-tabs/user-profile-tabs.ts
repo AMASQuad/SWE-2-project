@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserDataProvider } from '../../../providers/user-data/user-data';
 
 /**
  * Generated class for the UserProfileTabsPage page.
@@ -15,7 +16,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UserProfileTabsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //attributes
+  userData:UserDataProvider;
+  constructor(public navCtrl: NavController, public navParams: NavParams,db:UserDataProvider) {
+    this.userData = db;
   }
 
   ionViewDidLoad() {

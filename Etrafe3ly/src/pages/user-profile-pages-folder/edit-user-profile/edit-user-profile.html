@@ -23,19 +23,19 @@
     <!-- first name -->
             <ion-item>
               <ion-label floating>First name</ion-label>
-              <ion-input type="text" [(ngModel)]="this.navParams.firstName"></ion-input>
+              <ion-input type="text" [(ngModel)]="this.userDataObj.userData.firstName"></ion-input>
             </ion-item>
           
     <!-- last name -->
             <ion-item>
               <ion-label floating> Last name</ion-label>
-              <ion-input type="text" [(ngModel)]="this.navParams.lastName"></ion-input>
+              <ion-input type="text" [(ngModel)]="this.userDataObj.userData.lastName"></ion-input>
             </ion-item>
     
     <!-- password -->
               <ion-item>
                   <ion-label floating>Password</ion-label>
-                  <ion-input type="Password"></ion-input>
+                  <ion-input type="Password" ></ion-input>
                 </ion-item>
     
     <!-- confirm password -->
@@ -46,8 +46,8 @@
     
     <!-- choosing security question -->
                       <ion-item>
-                        <ion-label floating [(ngModel)]="this.navParams.secQuestion">Security question</ion-label>
-                        <ion-select >
+                        <ion-label floating >Security question</ion-label>
+                        <ion-select [(ngModel)]="this.userDataObj.userData.secQuestion">
                           <ion-option value="What is your favourite singer?">What is your favourite singer?</ion-option>
                           <ion-option value="What is your favourite city?">What is your favourite city?</ion-option>
                           <ion-option value="What is your favourite uncle?">What is your favourite uncle?</ion-option>
@@ -58,25 +58,25 @@
     <!-- writing security question answer -->
                 <ion-item>
                     <ion-label floating>Answer</ion-label>
-                    <ion-input type="text" [(ngModel)]="this.navParams.secAns"></ion-input>
+                    <ion-input type="text" [(ngModel)]="this.userDataObj.userData.secAns"></ion-input>
                   </ion-item>
     
     <!-- phone number -->
                   <ion-item>
                       <ion-label floating>Phone number</ion-label>
-                      <ion-input type="tel" [(ngModel)]="this.navParams.phone"></ion-input>
+                      <ion-input type="tel" [(ngModel)]="this.userDataObj.userData.phone"></ion-input>
                     </ion-item>
     
     <!-- national ID -->
                   <ion-item>
                         <ion-label floating>National ID</ion-label>
-                        <ion-input type="tel" [(ngModel)]="this.navParams.nationalID"></ion-input>
+                        <ion-input type="tel" [(ngModel)]="this.userDataObj.userData.nationalID"></ion-input>
                     </ion-item>
     
     <!-- gender selection -->
                     <ion-item>
                         <ion-label>Gender</ion-label>
-                        <ion-select [(ngModel)]="this.navParams.gender">
+                        <ion-select [(ngModel)]="this.userDataObj.userData.gender">
                           <ion-option value="female">Female</ion-option>
                           <ion-option value="male">Male</ion-option>
                           <ion-option value="other">Other</ion-option>
@@ -86,7 +86,7 @@
     <!-- birth date -->
                       <ion-item>
                           <ion-label>Birth date</ion-label>
-                          <ion-datetime displayFormat="D, MMMM YYYY" [(ngModel)]="this.navParams.gender"></ion-datetime>
+                          <ion-datetime displayFormat="D, MMMM YYYY" [(ngModel)]="this.userDataObj.userData.birthDate"></ion-datetime>
                         </ion-item>
                 
     <!-- sign up button -->

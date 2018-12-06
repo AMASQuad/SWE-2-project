@@ -35,5 +35,8 @@ export class UserDataProvider {
     return array[0];
   }
   
+  public getUserData(){
+    return this.userData
+  }
 
 }
