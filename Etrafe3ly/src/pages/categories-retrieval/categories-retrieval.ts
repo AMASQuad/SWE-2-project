@@ -15,7 +15,7 @@ import firebase from 'firebase'
 })
 export class CategoriesRetrievalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -47,6 +47,7 @@ export class CategoriesRetrievalPage {
 
         //retrieva the data
     this.retrieveDataOfLawyers(this.navParams.data);
+
   }
 
 }

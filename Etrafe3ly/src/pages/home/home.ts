@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import firebase from 'firebase';
 import { UserDataProvider } from '../../providers/user-data/user-data';
+import { ModalController } from 'ionic-angular';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -17,7 +19,8 @@ export class HomePage {
       
   }
   //attributes
-  
+  modalCtrl:ModalController;
+
   ionViewDidLoad() {
     if(this.userDataObj.isLoggedIn){
         console.log('user Logged In')
@@ -45,5 +48,12 @@ logout(){
 getObject(){
   return globalvar
 }
+
+  //search
+  presentModal() {
+    const modal = this.modalCtrl.create('SearchModalPage');
+    modal.present();
+  }
+
 }
 var globalvar = {};

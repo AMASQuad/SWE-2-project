@@ -22,6 +22,7 @@ export class lawyer{
     peopleRated:number;
     overallRate:number;
 
+
     //constant to store data
     
 }
