@@ -9,9 +9,7 @@
     <ion-navbar color="ourColor">
     <ion-title>Profile</ion-title>
   </ion-navbar>
-  <button ion-button end (click)='deleteAcc(this.navParams.data.uid)'>
-    Delete Account
-  </button>
+  
 </ion-header>
 
 
@@ -22,28 +20,31 @@
 <img src="../../assets/imgs/user.png" class="profilePhoto">
 
 <!-- first + last name div using attribute binding-->
-<div class="name"> Hello ,{{this.navParams.data.firstName}}</div> </div>
+<div class="name"> Hello ,{{this.userDataObj.userData.firstName}}</div> </div>
 <!-- Bio div -->
-<div style="font-size:20px; margin-top: 35%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+<div style="font-size:20px; margin-top: 35%;">{{this.userDataObj.userData.bio}}</div>
 
    <!-- hour rate -->
    <div>
-     <div style="display:inline-block; font-size: 18px; font-weight: bold; margin-top: 5%;">Hour rate: </div>
+     <div style="display:inline-block; font-size: 18px; font-weight: bold; margin-top: 5%;">Hour rate: {{this.userDataObj.userData.hourRate}}</div>
      <!-- this div will get the hour rate attribute -->
      <div style="display:inline-block; color:green; font-size: 20px;">	&nbsp;20 $</div>
    </div>
 
    <!-- address -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">
-     Address: {{this.navParams.data.address}}
+     Address: {{this.userDataObj.userData.address}}
    </div>
 
    <!-- phone number -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">
-     Phone number: {{this.navParams.data.phone}}
+     Phone number: {{this.userDataObj.userData.phone}}
    </div>
 
    <!-- rating -->
-   <div style="font-size: 18px; font-weight: bold; margin-top: 5%; text-align: center;" [(ngModel)]="this.rating">Rating</div>
+   <div style="font-size: 18px; font-weight: bold; margin-top: 5%; text-align: center;">Rating</div>
+
+   <button ion-button end (click)='deleteAcc()'>
+    Delete Account
+  </button>
 </ion-content>

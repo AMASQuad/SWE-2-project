@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { UserDataProvider } from '../../providers/user-data/user-data';
+import firebase from 'firebase'
+import { lawyer } from '../../modules/lawyer';
 /**
  * Generated class for the EditlawyerProfilePage page.
  *
@@ -14,12 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'editlawyer-profile.html',
 })
 export class EditlawyerProfilePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //attributes
+  userDataObj:UserDataProvider;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    db:UserDataProvider) {
+      this.userDataObj = db;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditlawyerProfilePage');
+  }
+  updateInfoToDB(){
+    firebase.database().ref(lawyer+'/'+this.userDataObj.userData.key).set(this.userDataObj.userData)
   }
 
 }

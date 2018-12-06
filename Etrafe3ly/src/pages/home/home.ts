@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { ModalController } from 'ionic-angular';
@@ -12,7 +12,8 @@ import { ModalController } from 'ionic-angular';
 
 export class HomePage {
   userDataObj:UserDataProvider;
-  constructor(public navCtrl: NavController,private navParams:NavParams, private toastCtrl:ToastController,db:UserDataProvider) {
+  constructor(public navCtrl: NavController,private navParams:NavParams,
+    db:UserDataProvider) {
     
      this.userDataObj = db;
       
@@ -22,13 +23,7 @@ export class HomePage {
   modalCtrl:ModalController;
 
   ionViewDidLoad() {
-    if(this.userDataObj.isLoggedIn){
-        console.log('user Logged In')
-        console.log(this.userDataObj.userData)
-    }
-    else{
-      console.log('no user Logged In')
-    }
+  
   }
   //this function is here just so i can reach the lawyer profile page
   goToProfile(){

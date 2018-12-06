@@ -56,7 +56,7 @@ export class LoginPage {
          const userData = this.userDataObj.snaptoObject(data);
           this.userDataObj.collectData(userData,data.ref.key) // store data in service
           this.navCtrl.setRoot(HomePage).then(()=>{
-            console.log('Hello if condition')
+            //lawyer logged in
 
           })
         
@@ -66,7 +66,7 @@ export class LoginPage {
               const userData = this.userDataObj.snaptoObject(data)
               this.userDataObj.collectData(userData,data.ref.key) // store data in service
               this.navCtrl.setRoot(HomePage).then(()=>{
-                console.log('else if condition')
+                //user logged in
 
               })
             })

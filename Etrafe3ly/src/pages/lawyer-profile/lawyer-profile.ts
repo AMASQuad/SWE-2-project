@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase'
 import { UserDataProvider } from '../../providers/user-data/user-data';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -9,20 +10,17 @@ import { UserDataProvider } from '../../providers/user-data/user-data';
   templateUrl: 'lawyer-profile.html',
 })
 export class LawyerProfilePage {
-  //get data 
+  //get data from service
   userDataObj:UserDataProvider;
   constructor(public navCtrl: NavController, public navParams: NavParams,db:UserDataProvider) {
     this.userDataObj = db;
-    
   }
 
   ionViewDidLoad() {
     
   }
 
-  
-
-  getRating(){
+  /*getRating(){
       let  avgRate;
         firebase.database().ref('/Booking').orderByChild('overAllRating').on('value',(data)=>{
         const dataObj = this.userDataObj.snaptoObject(data)
@@ -40,9 +38,19 @@ export class LawyerProfilePage {
     return avgRate
   }
   rating = this.getRating()
+*/
+deleteAcc(){
+    
+  firebase.auth().currentUser.delete().then(()=>{
+    //user data deleted
+    this.userDataObj.freeData()
+    console.log('user Deleted')
+    this.navCtrl.setRoot(HomePage)
+    firebase.database().ref('Accounts/').orderByChild('uid').equalTo(this.userDataObj.userData.uid).ref.remove()
 
-  deleteAcc(uid){
-    firebase.database().ref('/Accounts').orderByChild('uid')
-    .equalTo(uid).ref.remove()
-  }
+  }).catch( ()=>{
+    // error handling
+  })
+  
+}
 }

@@ -20,13 +20,13 @@
   <!-- first name -->
           <ion-item>
             <ion-label floating>First name</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="this.userDataObj.userData.firstName"></ion-input>
           </ion-item>
         
   <!-- last name -->
           <ion-item>
             <ion-label floating> Last name</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="this.userDataObj.userData.lastName"></ion-input>
           </ion-item>
         
   <!-- e-mail -->
@@ -50,7 +50,7 @@
   <!-- choosing security question -->
                     <ion-item>
                       <ion-label floating>Security question</ion-label>
-                      <ion-select >
+                      <ion-select [(ngModel)]="this.userDataObj.userData.secQuestion">
                         <ion-option value="What is your favourite singer?">What is your favourite singer?</ion-option>
                         <ion-option value="What is your favourite city?">What is your favourite city?</ion-option>
                         <ion-option value="What is your favourite uncle?">What is your favourite uncle?</ion-option>
@@ -61,25 +61,25 @@
   <!-- writing security question answer -->
               <ion-item>
                   <ion-label floating>Answer</ion-label>
-                  <ion-input type="text"></ion-input>
+                  <ion-input type="text" [(ngModel)]="this.userDataObj.userData.secAnswer"></ion-input>
                 </ion-item>
   
   <!-- phone number -->
                 <ion-item>
                     <ion-label floating>Phone number</ion-label>
-                    <ion-input type="tel"></ion-input>
+                    <ion-input type="tel" [(ngModel)]="this.userDataObj.userData.phone"></ion-input>
                   </ion-item>
   
   <!-- national ID -->
                 <ion-item>
                       <ion-label floating>National ID</ion-label>
-                      <ion-input type="tel"></ion-input>
+                      <ion-input type="tel" [(ngModel)]="this.userDataObj.userData.nationalID"></ion-input>
                   </ion-item>
   
   <!-- gender selection -->
                   <ion-item>
                       <ion-label>Gender</ion-label>
-                      <ion-select >
+                      <ion-select [(ngModel)]="this.userDataObj.userData.gender">
                         <ion-option value="female">Female</ion-option>
                         <ion-option value="male">Male</ion-option>
                         <ion-option value="other">Other</ion-option>
@@ -89,14 +89,14 @@
   <!-- birth date -->
                     <ion-item>
                         <ion-label>Birth date</ion-label>
-                        <ion-datetime displayFormat="D, MMMM YYYY" ></ion-datetime>
+                        <ion-datetime displayFormat="D, MMMM YYYY" [(ngModel)]="this.userDataObj.userData.birthDate"></ion-datetime>
                       </ion-item>
     
   <!-- start of the fields required from the lawyer when he choose tha lawyer account type -->          
   <!-- changing degree of enrollment -->
           <ion-item>
               <ion-label>Degree of enrollment</ion-label>
-              <ion-select >
+              <ion-select [(ngModel)]="this.userDataObj.userData.degreeOfEnrollment">
                 <ion-option value="General Schedule">General Schedule</ion-option>
                 <ion-option value="Primary">Primary</ion-option>
                 <ion-option value="High Appeal and State Council">High Appeal and State Council</ion-option>
@@ -107,18 +107,18 @@
   <!-- office address -->
           <ion-item>
                 <ion-label floating>Address</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" [(ngModel)]="this.userDataObj.userData.address"></ion-input>
               </ion-item>
             
   <!-- hour rate -->
               <ion-item>
                   <ion-label floating>Hour rate (Egyptian pound)</ion-label>
-                  <ion-input type="number"></ion-input>
+                  <ion-input type="number" [(ngModel)]="this.userDataObj.userData.hourRate"></ion-input>
                 </ion-item>
         </ion-list>
   
   <!-- bio text area -->
-        <textarea placeholder="Bio" rows="5" style="margin-left: 5%;display:block; font-size: 16px; width: 95%"></textarea>
+        <textarea placeholder="Bio" rows="5" style="margin-left: 5%;display:block; font-size: 16px; width: 95%" [(ngModel)]="this.userDataObj.userData.bio"></textarea>
         
   <!-- sign up button -->
   <!-- this button will check if all the fields are complete
@@ -126,6 +126,6 @@
   <!-- if the data is complete and valid then it will register the user then login -->
   <!-- if the data is not complete it will show alert missing data -->
         <div style="text-align:center; margin-top:5%; margin-bottom:5%;">
-          <button style="width:50%;" ion-button>Update</button>
+          <button style="width:50%;" ion-button (click)='updateInfoToDB()'>Update</button>
         </div>
 </ion-content>
