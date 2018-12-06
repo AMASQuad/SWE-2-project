@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { lawyer } from '../../modules/lawyer';
 import firebase from 'firebase';
-import { userRef, lawyerRef } from '../../modules/database.nodes';
-import { Camera } from '@ionic-native/camera';
-import { ToastController } from 'ionic-angular';
+import {  lawyerRef } from '../../modules/database.nodes';
+//import { Camera } from '@ionic-native/camera';
+//import { ToastController } from 'ionic-angular';
 
 
 /**
@@ -24,7 +24,7 @@ export class LawyerSignUpPage {
   //creating object from lawyer class
   newLawyer = new lawyer();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera:Camera, private toastCtrl:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, /*private camera:Camera, private toastCtrl:ToastController*/) {
 
   }
 
@@ -46,7 +46,7 @@ export class LawyerSignUpPage {
 
   //get picture
 
-  imagePath='';
+  /*imagePath='';
   openGallery(){
     this.camera.getPicture({
       destinationType:this.camera.DestinationType.DATA_URL,
@@ -71,5 +71,5 @@ export class LawyerSignUpPage {
           duration:5000
         }).present();
       })
-  }
+  }*/
 }

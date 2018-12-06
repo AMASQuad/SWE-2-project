@@ -12,9 +12,6 @@
       </button>
   <ion-title>Profile</ion-title>
 </ion-navbar>
-<button ion-button end (click)='deleteAcc(this.navParams.data.uid)'>
-    Delete Account
-</button>
 
 </ion-header>
 
@@ -33,5 +30,13 @@
     Phone number: {{this.userDataObj.userData.phone}}
   </div>
 
-  <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">National ID: {{this.navParams.data.nationalID}}</div>
+  <div style="font-size: 18px; font-weight: bold;;">
+    Email: {{this.userDataObj.userData.email}}
+  </div>
+
+  <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">National ID: {{this.userDataObj.userData.nationalID}}</div>
+
+  <button ion-button end (click)='deleteAcc()'>
+    Delete Account
+  </button>
 </ion-content>

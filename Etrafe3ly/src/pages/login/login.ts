@@ -43,15 +43,6 @@ export class LoginPage {
   goToSignUp() {
     this.navCtrl.push("AccTypePage");
   }
-  snaptoObject(snap:any) { // to get data from db and put it into array
-    let array = [];
-    snap.forEach(element => {
-      let item = element.val();
-      item.key = element.key;
-      array.push(item);
-    });
-    return array[0];
-  }
   //-----------------------
   
   //Login
@@ -62,35 +53,27 @@ export class LoginPage {
       firebase.database().ref(lawyerRef).orderByChild("uid").equalTo(uid).on("value", data => {
         //
           if (data.exists()){
-         const userData = this.snaptoObject(data);
-          this.userDataObj.collectData(userData) // store data in service
+         const userData = this.userDataObj.snaptoObject(data);
+          this.userDataObj.collectData(userData,data.ref.key) // store data in service
           this.navCtrl.setRoot(HomePage).then(()=>{
             console.log('Hello if condition')
 
           })
         
         }
-
           else {
             firebase.database().ref(userRef).orderByChild('uid').equalTo(uid).on('value',data =>{
-              const userData = this.snaptoObject(data)
-              this.userDataObj.collectData(userData) // store data in service
+              const userData = this.userDataObj.snaptoObject(data)
+              this.userDataObj.collectData(userData,data.ref.key) // store data in service
               this.navCtrl.setRoot(HomePage).then(()=>{
                 console.log('else if condition')
 
               })
             })
-
           }
         //
       })
-      
-    
-        
               }
-  
           )}
-
-    
 }
 
