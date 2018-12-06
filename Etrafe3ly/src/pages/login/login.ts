@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { ForgotPassPage } from "../forgot-pass/forgot-pass";
 import { HomePage } from "../../pages/home/home";
 import firebase from "firebase";
 import { userRef, lawyerRef } from "../../modules/database.nodes";
+import { UserDataProvider } from "../../providers/user-data/user-data";
 
 /**
  * Generated class for the LoginPage page.
@@ -18,9 +19,16 @@ import { userRef, lawyerRef } from "../../modules/database.nodes";
   templateUrl: "login.html"
 })
 export class LoginPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl:ToastController) {}
+  //db service 
+  userDataObj:UserDataProvider
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    db:UserDataProvider) {
+    this.userDataObj =db;
+
+  }
   //attributes
-  userInfo: any = {}; // to get data from html template
+  userInfo:any = {}; // to get data from html template
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad LoginPage");
@@ -45,59 +53,35 @@ export class LoginPage {
     return array[0];
   }
   //-----------------------
-  public recievedData : any = {} //from user
+  
   //Login
-  searchForUser(uid){
-              
-    firebase.database().ref('Accounts/').orderByChild("uid").equalTo(uid)
-    .on("value", data => {
-    //search in db and retrieve data
-    // console.log(data);
-    const userData = this.snaptoObject(data);
-    this.recievedData = userData; //from user
-    console.log('before If');
-    console.log(userData);
-    console.log(data.key);
-    if(data.key){//check in users
-        //
-          console.log('users table')
-          console.log(userData)
-          this.navCtrl.setRoot(HomePage,userData).then(() =>{
-              this.toastCtrl.create({
-                message : `Welcome ${userData}`
-              }).present()
-          })
-        //
-        }})} // here
-        searchForLawyer(uid){
-          firebase.database().ref('Accounts/').orderByChild("uid").equalTo(uid).on("value", data => {
-            //  
-             const userData = this.snaptoObject(data);
-              console.log(data.key)
-              console.log('lawyers table')
-              console.log(userData)
-              this.navCtrl.setRoot(HomePage,userData).then(()=>{
-                this.toastCtrl.create({
-                  message:`Welcome ${userData.firstName}`
-                }).present()
-              })
-            //
-          })
-        }
-
   login() {
-    
     firebase.auth().signInWithEmailAndPassword(this.userInfo.email, this.userInfo.password)
     .then(data=>{ 
-      const uid = data.user.uid
-      firebase.database().ref(userRef).orderByChild("uid").equalTo(uid).on("value", data => {
-        //  
+      const uid = data.user.uid //made this cuz of conflict
+      firebase.database().ref(lawyerRef).orderByChild("uid").equalTo(uid).on("value", data => {
+        //
+          if (data.exists()){
          const userData = this.snaptoObject(data);
-          this.navCtrl.setRoot(HomePage,userData).then(()=>{
-            this.toastCtrl.create({
-              message:`Welcome ${userData.firstName}`
-            }).present()
+          this.userDataObj.collectData(userData) // store data in service
+          this.navCtrl.setRoot(HomePage).then(()=>{
+            console.log('Hello if condition')
+
           })
+        
+        }
+
+          else {
+            firebase.database().ref(userRef).orderByChild('uid').equalTo(uid).on('value',data =>{
+              const userData = this.snaptoObject(data)
+              this.userDataObj.collectData(userData) // store data in service
+              this.navCtrl.setRoot(HomePage).then(()=>{
+                console.log('else if condition')
+
+              })
+            })
+
+          }
         //
       })
       

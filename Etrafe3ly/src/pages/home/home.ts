@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import firebase from 'firebase';
+import { UserDataProvider } from '../../providers/user-data/user-data';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -8,20 +9,23 @@ import firebase from 'firebase';
 
 
 export class HomePage {
-  userData;
-  constructor(public navCtrl: NavController,private navParams:NavParams) {
-  
-    globalvar = navParams.data
+  userDataObj:UserDataProvider;
+  constructor(public navCtrl: NavController,private navParams:NavParams, private toastCtrl:ToastController,db:UserDataProvider) {
+    
+     this.userDataObj = db;
       
       
   }
   //attributes
   
-   // recieved data from 
-  loggedin:boolean;
-  userType:string;
-  
   ionViewDidLoad() {
+    if(this.userDataObj.isLoggedIn){
+        console.log('user Logged In')
+        console.log(this.userDataObj.userData)
+    }
+    else{
+      console.log('no user Logged In')
+    }
   }
   //this function is here just so i can reach the lawyer profile page
   goToProfile(){
@@ -34,9 +38,8 @@ export class HomePage {
   }
 //Logout
 logout(){
-  firebase.auth().signOut();
-  console.log()
-  this.loggedin = false;
+  firebase.auth().signOut(); // end session
+  this.userDataObj.freeData(); // free data from service
 }
 
 getObject(){

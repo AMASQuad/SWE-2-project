@@ -25,12 +25,12 @@
     <img src="../../assets/imgs/user.png" class="profilePhoto">
     
     <!-- first + last name div using attribute binding-->
-    <div class="name"> Hello , {{this.navParams.data.firstName}}</div>
+    <div class="name"> Hello , {{this.userDataObj.userData.firstName}}</div>
     </div>
 
        <!-- phone number -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 35%; color: green;">
-    Phone number: {{this.navParams.data.phone}}
+    Phone number: {{this.userDataObj.userData.phone}}
   </div>
 
   <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">National ID: {{this.navParams.data.nationalID}}</div>

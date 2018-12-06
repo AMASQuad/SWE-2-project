@@ -34,7 +34,7 @@ export class user {
 
         lawyers:any[] = [];
 searchForLawyer(textData:string) {
-    firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(cat).on('value',(data)=>{
+    firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(textData).on('value',(data)=>{
         const recieved = this.snaptoObject(data);
         this.lawyers.push(recieved)
     })
@@ -51,7 +51,7 @@ snaptoObject(snap) { // to get data from db and put it into array
   return array[0];
 }
 
-constructor(private emailComposer: EmailComposer) { } // will be moved 
+/*constructor(private emailComposer: EmailComposer) { } // will be moved 
 
 
 
@@ -76,7 +76,7 @@ let email = {
 
 // Send a text message using default options
 this.emailComposer.open(email);
-// ---------------------------------
+// ---------------------------------*/
 
 
 

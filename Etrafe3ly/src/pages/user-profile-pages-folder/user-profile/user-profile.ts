@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import  firebase  from 'firebase'
+import { UserDataProvider } from '../../../providers/user-data/user-data';
 /**
  * Generated class for the UserProfilePage page.
  *
@@ -14,11 +15,14 @@ import  firebase  from 'firebase'
   templateUrl: 'user-profile.html',
 })
 export class UserProfilePage {
+  //db service
+  userDataObj:UserDataProvider;
+  constructor(public navCtrl: NavController, public navParams: NavParams,db:UserDataProvider) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-    console.log(this.navParams.data)
+    this.userDataObj = db;
   }
+  // attributes
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserProfilePage');
