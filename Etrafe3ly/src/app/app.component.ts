@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Button } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
@@ -9,6 +9,9 @@ import { FaqPage } from '../pages/faq/faq';
 import { LoginPage } from '../pages/login/login';
 import { AccTypePage } from '../pages/acc-type/acc-type';
 import { FIREBASE_CONFIG } from './app.firebase.config';
+import { UserDataProvider } from '../providers/user-data/user-data';
+import { LawyerProfilePage } from '../pages/lawyer-profile/lawyer-profile';
+import { UserProfilePage } from '../pages/user-profile-pages-folder/user-profile/user-profile';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,22 +19,25 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  
+  // attributes
+  userDataObj:UserDataProvider;
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar,
+    db:UserDataProvider
+    , public splashScreen: SplashScreen) {
     this.initializeApp();
-
+    this.userDataObj =db;
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Categories', component: CategoriesPage },
       { title: 'FAQ', component: FaqPage },
-      { title: 'Login', component: LoginPage },
-      { title: 'Sign up', component: AccTypePage},
-      { title: 'Logout', component: null}
+      //{ title: 'Login', component: LoginPage },
+      //{ title: 'Sign up', component: AccTypePage},
+      //{ title: 'Logout', component: null }
     ];
 
   }
@@ -66,5 +72,24 @@ export class MyApp {
     console.log('logout is pressed');
   }
   }
-  user_data = {} as any
+  go2Register(){
+    this.nav.push(AccTypePage)
+  }
+ 
+  go2Login(){
+    this.nav.push(LoginPage)
+  }
+
+  Logout(){
+    firebase.auth().signOut(); // end session
+    this.userDataObj.freeData(); // free data from service
+  }
+
+  go2Profile(){
+    if(this.userDataObj.userType == 'Lawyers'){
+      this.nav.push('LawyerProfilePage')}
+    else{
+      this.nav.push('UserProfilePage')
+    }
+  }
 }

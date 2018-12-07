@@ -22,6 +22,7 @@ export class UserDataProvider {
   freeData(){
     this.userData = {}
     this.isLoggedIn = false;
+    this.userType = '';
   }
 
   snaptoObject(snap:any) {  // to get data from db and put it into array

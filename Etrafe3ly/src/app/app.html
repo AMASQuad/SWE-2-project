@@ -10,6 +10,10 @@
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
+      <button ion-button menuClose *ngIf="this.userDataObj.isLoggedIn" (click)='go2Profile()'>Profile</button>
+      <button ion-button menuClose *ngIf="!this.userDataObj.isLoggedIn" (click)='go2Register()'>Sign Up</button>
+      <button ion-button menuClose *ngIf="!this.userDataObj.isLoggedIn" (click)='go2Login()'>Login</button>
+      <button ion-button menuClose *ngIf="this.userDataObj.isLoggedIn" (click)='Logout()'>Logout</button>
     </ion-list>
   </ion-content>
 

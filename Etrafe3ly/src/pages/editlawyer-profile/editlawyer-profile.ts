@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import firebase from 'firebase'
 import { lawyer } from '../../modules/lawyer';
+import { lawyerRef } from '../../modules/database.nodes';
 /**
  * Generated class for the EditlawyerProfilePage page.
  *
@@ -30,4 +31,7 @@ export class EditlawyerProfilePage {
     firebase.database().ref(lawyer+'/'+this.userDataObj.userData.key).set(this.userDataObj.userData)
   }
 
+  uploadPic(){
+    let storageRef = firebase.storage().ref(lawyerRef+'/'+this.userDataObj.userData.key);
+  }
 }

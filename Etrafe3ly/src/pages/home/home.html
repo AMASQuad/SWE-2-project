@@ -9,8 +9,5 @@
 
 <ion-content padding>
   <h3 style="text-align:center;">Top rated lawyers</h3>
-  <button ion-button *ngIf="this.userDataObj.isLoggedIn" (click)='logout()'>Logout</button>
-  <button ion-button *ngIf="this.userDataObj.userType == 'Lawyers'" (click)='goToProfile()'>Lawyer Profile</button>
   <button ion-button (click)='goToCat()'>cat</button>
-  <button ion-button *ngIf="this.userDataObj.userType == 'Users'" (click)='goToUserProfile()'>user Profile</button>
 </ion-content>
