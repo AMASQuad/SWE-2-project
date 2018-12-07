@@ -16,6 +16,9 @@ import { UserDataProvider } from '../../providers/user-data/user-data';
 })
 export class SearchModalPage {
 
+  //attributes
+  
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
       db:UserDataProvider) {
         this.userDataObj = db

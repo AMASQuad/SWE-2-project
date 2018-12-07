@@ -38,8 +38,8 @@ export class UserDataProvider {
     return array[0];
   }
   
-  lawyerSearch(fn:string){
-    firebase.database().ref(lawyerRef).orderByChild('firstName'+' '+'lastName').equalTo(fn).on('value',(data)=>{
+  lawyerSearch(fn:any){
+    firebase.database().ref(lawyerRef).orderByChild('firstName').equalTo(fn).on('value',(data)=>{
       if (data.exists()){
       const recieved = this.snaptoObject(data);
       this.ListOfLawyers.push(recieved)
@@ -47,7 +47,10 @@ export class UserDataProvider {
     }
       else{
           console.log('no data existing with this name')
+          this.ListOfLawyers = []
       }
     })
   }
+
+
 }

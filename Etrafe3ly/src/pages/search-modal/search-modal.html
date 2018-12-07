@@ -14,10 +14,16 @@
 
 
 <ion-content padding>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar #searchTerm (ionInput)='this.userDataObj.lawyerSearch(searchTerm.value)'></ion-searchbar>
     <ion-list>
-      <ion-item *ngFor="let item of items">
-        {{ item }}
+      <ion-item *ngFor="let lawyer of this.userDataObj.ListOfLawyers">
+        <ion-avatar item-start>
+          <img src="img/avatar-finn.png">
+        </ion-avatar>
+        <h2>{{ lawyer.firstName }}</h2>
+        <h3>{{lawyer.lastName}}</h3>
+        <p>{{lawyer.bio}}</p>
       </ion-item>
     </ion-list>
+
 </ion-content>

@@ -13,8 +13,8 @@ import { ModalController } from 'ionic-angular';
 export class HomePage {
   userDataObj:UserDataProvider;
   constructor(public navCtrl: NavController,private navParams:NavParams,
-    db:UserDataProvider,modalCtrl:ModalController) {
-    this.modalCtrl = modalCtrl
+    db:UserDataProvider,modCtrl:ModalController) {
+    this.modalCtrl = modCtrl
      this.userDataObj = db;
       
       
