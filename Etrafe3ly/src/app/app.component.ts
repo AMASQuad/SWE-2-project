@@ -10,8 +10,6 @@ import { LoginPage } from '../pages/login/login';
 import { AccTypePage } from '../pages/acc-type/acc-type';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { UserDataProvider } from '../providers/user-data/user-data';
-import { LawyerProfilePage } from '../pages/lawyer-profile/lawyer-profile';
-import { UserProfilePage } from '../pages/user-profile-pages-folder/user-profile/user-profile';
 
 @Component({
   templateUrl: 'app.html'
@@ -34,10 +32,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Categories', component: CategoriesPage },
-      { title: 'FAQ', component: FaqPage },
-      //{ title: 'Login', component: LoginPage },
-      //{ title: 'Sign up', component: AccTypePage},
-      //{ title: 'Logout', component: null }
+      { title: 'FAQ', component: FaqPage }
     ];
 
   }
@@ -83,13 +78,14 @@ export class MyApp {
   Logout(){
     firebase.auth().signOut(); // end session
     this.userDataObj.freeData(); // free data from service
+    this.nav.pop()
   }
 
   go2Profile(){
     if(this.userDataObj.userType == 'Lawyers'){
-      this.nav.push('LawyerProfilePage')}
+      this.nav.push('LawyerProfileTabsPage')}
     else{
-      this.nav.push('UserProfilePage')
+      this.nav.push('UserProfileTabsPage')
     }
   }
 }

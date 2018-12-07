@@ -13,8 +13,8 @@ import { ModalController } from 'ionic-angular';
 export class HomePage {
   userDataObj:UserDataProvider;
   constructor(public navCtrl: NavController,private navParams:NavParams,
-    db:UserDataProvider) {
-    
+    db:UserDataProvider,modalCtrl:ModalController) {
+    this.modalCtrl = modalCtrl
      this.userDataObj = db;
       
       
@@ -41,10 +41,12 @@ logout(){
 }
 
 
-  //search
+  //search page
   presentModal() {
     const modal = this.modalCtrl.create('SearchModalPage');
     modal.present();
   }
+      
+
 
 }

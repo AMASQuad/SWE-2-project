@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserDataProvider } from '../../providers/user-data/user-data';
 
 /**
  * Generated class for the SearchModalPage page.
@@ -15,8 +16,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SearchModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+      db:UserDataProvider) {
+        this.userDataObj = db
   }
+  //attributes
+  userDataObj:UserDataProvider;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchModalPage');
@@ -25,4 +30,6 @@ export class SearchModalPage {
   goToHome(){
     this.navCtrl.pop();
   }
+  //search code
+  
 }
