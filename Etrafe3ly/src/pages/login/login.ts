@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { ForgotPassPage } from "../forgot-pass/forgot-pass";
 import { HomePage } from "../../pages/home/home";
 import firebase from "firebase";
-import { userRef, lawyerRef } from "../../modules/database.nodes";
+import { userRef, lawyerRef, usersCollection, lawyersCollection } from "../../modules/database.nodes";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 
 /**
@@ -46,6 +46,8 @@ export class LoginPage {
   //-----------------------
   
   //Login
+  // with REaltime DB
+  
   login() {
     firebase.auth().signInWithEmailAndPassword(this.userInfo.email, this.userInfo.password)
     .then(data=>{ 
@@ -54,7 +56,7 @@ export class LoginPage {
         //
           if (data.exists()){
          const userData = this.userDataObj.snaptoObject(data);
-          this.userDataObj.collectData(userData,data.ref.key) // store data in service
+          this.userDataObj.collectData(userData,lawyerRef) // store data in service
           this.navCtrl.setRoot(HomePage).then(()=>{
             //lawyer logged in
 
@@ -64,7 +66,7 @@ export class LoginPage {
           else {
             firebase.database().ref(userRef).orderByChild('uid').equalTo(uid).on('value',data =>{
               const userData = this.userDataObj.snaptoObject(data)
-              this.userDataObj.collectData(userData,data.ref.key) // store data in service
+              this.userDataObj.collectData(userData,userRef) // store data in service
               this.navCtrl.setRoot(HomePage).then(()=>{
                 //user logged in
 
@@ -75,5 +77,39 @@ export class LoginPage {
       })
               }
           )}
+          
+
+          
+         /*login() {//user or lawyer login
+          firebase.auth().signInWithEmailAndPassword(this.userInfo.email, this.userInfo.password)
+          .then(data=>{ 
+            const uid = data.user.uid //made this cuz of conflict
+            const db = firebase.firestore()
+            db.collection(usersCollection).doc(uid).get().then(data=>{
+              if(data.exists){
+                  const userData = data.data() // store data from db in object
+                  this.userDataObj.collectData(userData,'Users')
+                  this.navCtrl.setRoot(HomePage).then(()=>{
+                    //lawyer logged in
+        
+                  }).catch(err=>{
+                    console.log(err)
+                  })
+              }
+              else{
+                db.collection(lawyersCollection).doc(uid).get().then(data=>{
+                    const lawyerData = data.data() // store data from db in object
+                    this.userDataObj.collectData(lawyerData,'Lawyers')
+                    this.navCtrl.setRoot(HomePage).then(()=>{
+                      //lawyer logged in
+          
+                    }).catch(err=>{
+                      console.log(err)
+                    })
+                })
+              }
+            })
+              }
+                )}*/
 }
 

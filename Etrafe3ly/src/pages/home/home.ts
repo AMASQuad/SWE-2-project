@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import firebase from 'firebase';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { ModalController } from 'ionic-angular';
+import { DatabaseProvider } from '../../providers/database/database';
 
 @Component({
   selector: 'page-home',
@@ -11,11 +12,15 @@ import { ModalController } from 'ionic-angular';
 
 
 export class HomePage {
+  //attributes
   userDataObj:UserDataProvider;
-  constructor(public navCtrl: NavController,private navParams:NavParams,
-    db:UserDataProvider,modCtrl:ModalController) {
+  _Database:DatabaseProvider
+  constructor(public navCtrl: NavController,
+    db:UserDataProvider,modCtrl:ModalController,
+    dbService:DatabaseProvider) {
     this.modalCtrl = modCtrl
      this.userDataObj = db;
+     this._Database = dbService
       
       
   }
@@ -45,6 +50,9 @@ logout(){
   presentModal() {
     const modal = this.modalCtrl.create('SearchModalPage');
     modal.present();
+  }
+  test(){
+    console.log(this.userDataObj.lawyerData)
   }
       
 

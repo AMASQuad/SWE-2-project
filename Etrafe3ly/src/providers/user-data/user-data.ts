@@ -12,23 +12,42 @@ export class UserDataProvider {
   //attributes
   isLoggedIn:boolean = false;
   userData:any = {}
+  lawyerData:any = {}
   userType:string;
   ListOfLawyers:any[] = [] //list of lawyers that used in search
   constructor() {
     console.log('Hello UserDataProvider Provider');
   }
   collectData(data:any,ut:string){
-    this.userData = data
-    this.isLoggedIn = true;
     this.userType = ut
+
+    if(ut == 'Users'){//checks whetehr user or laweyer
+      this.userData = data
+    }
+    else{
+      this.lawyerData = data
+    }
+    this.isLoggedIn = true;
+    
   }
   freeData(){
     this.userData = {}
+    this.lawyerData = {}
     this.isLoggedIn = false;
     this.userType = '';
   }
 
   snaptoObject(snap:any) {  // to get data from db and put it into array
+    let array = [];
+    snap.forEach(element => {
+      let item = element.val();
+      item.key = element.key;
+      array.push(item);
+    });
+    return array[0];
+  }
+//---------------firestore snap2Object---------------
+  snaptoObjectFS(snap:any){
     let array = [];
     snap.forEach(element => {
       let item = element.val();
@@ -46,8 +65,8 @@ export class UserDataProvider {
       
     }
       else{
-          console.log('no data existing with this name')
           this.ListOfLawyers = []
+          this.lawyerData = {}
       }
     })
   }

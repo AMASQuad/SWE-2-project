@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import firebase from 'firebase' 
+import { IonicPage, NavController } from 'ionic-angular';
 /**
  * Generated class for the CategoriesPage page.
  *
@@ -15,7 +14,7 @@ import firebase from 'firebase'
 })
 export class CategoriesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {

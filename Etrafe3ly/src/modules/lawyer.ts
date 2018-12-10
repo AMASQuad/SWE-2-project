@@ -1,7 +1,10 @@
 import { DateTime } from 'ionic-angular';
+import { rating } from './rating';
 export class lawyer{
 
     //attributes
+    key:string;
+    id:string;
     uid:string;
     firstName:string;
     lastName:string;
@@ -18,11 +21,17 @@ export class lawyer{
     address:string;
     hourRate:number;
     bio:string;
+    img:string;
     //rate
-    peopleRated:number;
-    overallRate:number;
+    Rating:rating[] = [];
+    /*avgRating = ()=>{
+        let total = 0
+        this.Rating.forEach(element => {
+            total += element.stars
 
-
+        })
+        return total / this.Rating.length
+    }
+*/
     //constant to store data
-    
 }

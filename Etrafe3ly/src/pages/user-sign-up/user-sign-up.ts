@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { user } from '../../modules/user';
-import firebase from 'firebase';
-import { userRef } from '../../modules/database.nodes';
+import { DatabaseProvider } from '../../providers/database/database';
+
 /**
  * Generated class for the UserSignUpPage page.
  *
@@ -21,10 +21,11 @@ export class UserSignUpPage {
 newUser = {} as user;
 
   //database
-  
+  _Database:DatabaseProvider;//database provider
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    db:DatabaseProvider) {
+    this._Database = db;
   }
 
   ionViewDidLoad() {
@@ -32,15 +33,8 @@ newUser = {} as user;
   }
 
   //user registration function
-  userRegistration(){
-        firebase.auth().createUserWithEmailAndPassword(this.newUser.email,this.newUser.password).then((data)=>{
-        this.newUser.uid = data.user.uid;
-        this.newUser.email = null;
-        this.newUser.password = null;
-        firebase.database().ref(userRef).push(this.newUser)
-    }).catch((err) => {
-      console.log(err);//handling error
-    })
+  Register(){
+    this._Database.userRegistration2RTDB(this.newUser)
   }
 
 }

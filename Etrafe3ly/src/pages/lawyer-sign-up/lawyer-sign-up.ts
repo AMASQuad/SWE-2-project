@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { lawyer } from '../../modules/lawyer';
 import firebase from 'firebase';
-import {  lawyerRef } from '../../modules/database.nodes';
+import {  lawyerRef, lawyersCollection } from '../../modules/database.nodes';
+import { DatabaseProvider } from '../../providers/database/database';
 //import { Camera } from '@ionic-native/camera';
 //import { ToastController } from 'ionic-angular';
 
@@ -23,27 +24,18 @@ export class LawyerSignUpPage {
 
   //creating object from lawyer class
   newLawyer = new lawyer();
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, /*private camera:Camera, private toastCtrl:ToastController*/) {
-
+  _Database:DatabaseProvider;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+     db:DatabaseProvider) {
+      this._Database=db;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LawyerSignUpPage');
   }
-  //lawyer registration function
-  lawyerRegister(){
-      firebase.auth().createUserWithEmailAndPassword(this.newLawyer.email,this.newLawyer.password).then((data)=>{
-        this.newLawyer.uid = data.user.uid;
-        this.newLawyer.email = null;
-        this.newLawyer.password = null;
-        firebase.database().ref(lawyerRef).push(this.newLawyer);
-    }).catch((err) => {
-      console.log(err);//handling error
-    })
-    console.log('lawyer registered');
+  Register(){
+    this._Database.lawyerRegister2RTDB(this.newLawyer)
   }
-
   //get picture
 
   /*imagePath='';

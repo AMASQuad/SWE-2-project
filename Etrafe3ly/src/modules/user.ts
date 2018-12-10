@@ -4,6 +4,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
 export class user {
 
         //attributes
+        key:string;
+        id:string;
         uid:string;
         firstName:string;
         lastName:string;
@@ -31,15 +33,6 @@ export class user {
         })
                 
         }
-
-        lawyers:any[] = [];
-searchForLawyer(textData:string) {
-    firebase.database().ref('Lawyers').orderByChild('degreeOfEnrollment').equalTo(textData).on('value',(data)=>{
-        const recieved = this.snaptoObject(data);
-        this.lawyers.push(recieved)
-    })
-}
-
 
 snaptoObject(snap) { // to get data from db and put it into array
   let array = [];

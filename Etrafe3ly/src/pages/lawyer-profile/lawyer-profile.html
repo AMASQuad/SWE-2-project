@@ -20,9 +20,9 @@
 <img src="../../assets/imgs/user.png" class="profilePhoto">
 
 <!-- first + last name div using attribute binding-->
-<div class="name"> Hello ,{{this.userDataObj.userData.firstName}}</div> </div>
+<div class="name"> Hello ,{{this.userDataObj.lawyerData.firstName}}</div> </div>
 <!-- Bio div -->
-<div style="font-size:20px; margin-top: 35%;">{{this.userDataObj.userData.bio}}</div>
+<div style="font-size:20px; margin-top: 35%;">{{this.userDataObj.lawyerData.bio}}</div>
 
    <!-- hour rate -->
    <div>
@@ -33,18 +33,25 @@
 
    <!-- address -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">
-     Address: {{this.userDataObj.userData.address}}
+     Address: {{this.userDataObj.lawyerData.address}}
    </div>
 
    <!-- phone number -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 5%;">
-     Phone number: {{this.userDataObj.userData.phone}}
+     Phone number: {{this.userDataObj.lawyerData.phone}}
    </div>
 
    <!-- rating -->
    <div style="font-size: 18px; font-weight: bold; margin-top: 5%; text-align: center;">Rating</div>
 
-   <button ion-button end (click)='deleteAcc()'>
+   <button ion-button end (click)='deleteAcc()' *ngIf="this.userDataObj.userType == 'Lawyers'">
     Delete Account
   </button>
+  <button ion-button end  *ngIf="this.userDataObj.userType == 'Users'">
+    Book
+  </button>
+  <button ion-button end *ngIf="this.userDataObj.userType == 'Users'">
+      Rate
+  </button>
+
 </ion-content>

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import  firebase  from 'firebase'
 import { UserDataProvider } from '../../../providers/user-data/user-data';
 import { HomePage } from '../../home/home';
+import { userRef } from '../../../modules/database.nodes';
 /**
  * Generated class for the UserProfilePage page.
  *
@@ -33,10 +34,11 @@ export class UserProfilePage {
     
     firebase.auth().currentUser.delete().then(()=>{
       //user data deleted
+      firebase.database().ref(userRef).orderByChild('uid').equalTo(this.userDataObj.userData.uid).ref.remove()
       this.userDataObj.freeData()
       console.log('user Deleted')
-      this.navCtrl.setRoot(HomePage)
-      firebase.database().ref('Accounts/').orderByChild('uid').equalTo(this.userDataObj.userData.uid).ref.remove()
+      this.navCtrl.pop()
+      
 
     }).catch( ()=>{
       // error handling

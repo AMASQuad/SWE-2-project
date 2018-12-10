@@ -78,7 +78,7 @@ export class MyApp {
   Logout(){
     firebase.auth().signOut(); // end session
     this.userDataObj.freeData(); // free data from service
-    this.nav.pop()
+    this.nav.setRoot(HomePage)
   }
 
   go2Profile(){

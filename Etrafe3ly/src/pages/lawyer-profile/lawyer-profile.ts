@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase'
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { HomePage } from '../home/home';
+import { AlertController } from 'ionic-angular';
+import { lawyerRef } from '../../modules/database.nodes';
 
 @IonicPage()
 @Component({
@@ -12,12 +14,13 @@ import { HomePage } from '../home/home';
 export class LawyerProfilePage {
   //get data from service
   userDataObj:UserDataProvider;
-  constructor(public navCtrl: NavController, public navParams: NavParams,db:UserDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,db:UserDataProvider,
+    public alerCtrl:AlertController) {
     this.userDataObj = db;
   }
 
   ionViewDidLoad() {
-    
+
   }
 
   /*getRating(){
@@ -46,11 +49,11 @@ deleteAcc(){
     this.userDataObj.freeData()
     console.log('user Deleted')
     this.navCtrl.setRoot(HomePage)
-    firebase.database().ref('Accounts/').orderByChild('uid').equalTo(this.userDataObj.userData.uid).ref.remove()
+    firebase.database().ref(lawyerRef).orderByChild('uid').equalTo(this.userDataObj.userData.uid).ref.remove()
 
   }).catch( ()=>{
     // error handling
   })
-  
 }
+
 }

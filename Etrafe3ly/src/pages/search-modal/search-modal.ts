@@ -33,6 +33,11 @@ export class SearchModalPage {
   goToHome(){
     this.navCtrl.pop();
   }
-  //search code
+  //move to lawyer page
+  move2Lawyer(lawyer){
+    this.userDataObj.lawyerData=lawyer
+    this.navCtrl.push("LawyerProfilePage")
+  }
   
+
 }

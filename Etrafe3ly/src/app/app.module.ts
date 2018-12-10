@@ -16,6 +16,9 @@ import { Camera } from '@ionic-native/camera';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserDataProvider } from '../providers/user-data/user-data';
+import { CameraProvider } from '../providers/camera/camera';
+import { DatabaseProvider } from '../providers/database/database';
+import { StarsRatingProvider } from '../providers/stars-rating/stars-rating';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { UserDataProvider } from '../providers/user-data/user-data';
     Camera,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserDataProvider
+    UserDataProvider,
+    CameraProvider,
+    DatabaseProvider,
+    StarsRatingProvider
     
   ]
 })
