@@ -17,13 +17,19 @@
 
 <ion-content padding>
   <!-- this is the ion card that will be generated for each lawyer -->
-    <ion-card *ngFor="let lawyer of this.lawyers">
-        <ion-card-header>
+    <ion-card *ngFor="let lawyer of this.lawyers" >
+        <ion-card-header (click)='move2Lawyer(lawyer)'>
                 <img class="lawyerPhoto" src="../../assets/imgs/lawyer.png">
               <!-- here you will display lawyer's name -->
-              <h2 class="lawyerName">hello</h2>
+              <h2 class="lawyerName">{{lawyer.firstName}} {{lawyer.lastName}}</h2>
               <!-- lawyer rate -->
-              <h2 class="lawyerRate">{{lawyer.overallRate}} <ion-icon name="ios-star" color="gold"></ion-icon></h2>
+              <h2 class="lawyerRate"><!--ovaerAll rate-->
+                <!--
+                  <ion-icon name="ios-star" color="gold"></ion-icon>
+                  loop to get rate
+
+                -->
+              </h2>
         </ion-card-header>
         <!-- lawyer bio -->
         <ion-card-content>

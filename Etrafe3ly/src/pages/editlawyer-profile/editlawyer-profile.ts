@@ -30,7 +30,7 @@ export class EditlawyerProfilePage {
     console.log('ionViewDidLoad EditlawyerProfilePage');
   }
   updateInfoToDB(){
-    this._Database.updateInfo4Lawyer_FS(this.userDataObj.userData.uid,this.userDataObj.userData)
+    this._Database.updateInfo4Lawyer_RTDB(this.userDataObj.userData.uid,this.userDataObj.userData)
   }
 
   

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs/Observable";
 import firebase from 'firebase';
 import { user } from '../../modules/user';
-import { usersCollection, lawyersCollection, lawyerRef, userRef } from '../../modules/database.nodes';
+import { usersCollection, lawyersCollection, lawyerRef, userRef, ratingRef } from '../../modules/database.nodes';
 import { lawyer } from '../../modules/lawyer';
 import { CameraOptions, Camera } from '@ionic-native/camera';
+import { Rating } from '../../modules/rating';
+
 /*
   Generated class for the DatabaseProvider provider.
 
@@ -54,14 +55,28 @@ console.log('lawyer registered');
 }
 //----------------------------------------------------------
 
-  //---------------user Registration using firebase storage (firestore)-----------------
+snaptoObject(snap) { // to get data from db and put it into array
+  let array = [];
+  snap.forEach(element => {
+    let item = element.val();
+    item.key = element.key;
+    array.push(item);
+  });
+  return array[0];
+}
+
+  //---------------user Registration using firebase REaltime-----------------
   userRegistration2RTDB(User:user){
     firebase.auth().createUserWithEmailAndPassword(User.email,User.password).then((data)=>{
     const db = firebase.database() 
     User.uid = data.user.uid;
     User.email = null;
     User.password = null;
-    db.ref(userRef).push(User)
+    //apply this in lawyer
+    const newRefKey = db.ref(userRef).push()
+    User.key = newRefKey.key
+    newRefKey.set(User)
+    //---------
 }).catch((err) => {
   console.log(err);//handling error
 })
@@ -76,7 +91,10 @@ lawyerRegister2RTDB(Lawyer:lawyer){
     Lawyer.uid = data.user.uid;
     Lawyer.email = null;
     Lawyer.password = null;
-    db.ref(lawyerRef).push(Lawyer) 
+    ///apply this in lawyer
+    const newRefKey = db.ref(lawyerRef).push()
+    Lawyer.key = newRefKey.key
+    newRefKey.set(Lawyer)
 }).catch((err) => {
   console.log(err);//handling error
 })
@@ -182,5 +200,40 @@ uploadPic(uid){
 }
 
 //------------------------------rating-----------------
+// save rate to database (realtime database)
+saveRateTORTDB(rate:Rating){  
+      const db = firebase.database().ref(ratingRef)
+      //apply this in lawyer
+      const newRefKey = db.push()
+      newRefKey.key = rate.userUID+'_'+rate.lawyerUID //setting key 
+      rate.key = newRefKey.key //saving key
+      newRefKey.set(rate)
+  }
+
+  // retrieve avg rate from database (realtime database)
+  totalRate:any = []
+  total = 0
+  avgRate:number;
+
+  getAvgRate(lawyerUID:string){
+    //initialize to ensures it is free
+    this.totalRate = []
+    this.total = 0;
+    this.avgRate = 0; 
+    //-----------------
+    const db = firebase.database().ref(ratingRef)
+    db.orderByChild('lawyerID').equalTo(lawyerUID).on('child_added',dataSnapshot =>{
+      dataSnapshot.forEach(element => {
+        this.totalRate.push(dataSnapshot.val().value)
+      });//---------------finished saving data into array from db
+    })
+    //-----------------------looping to get total then we calculate avg rate 
+  for ( let i = 0;i< this.totalRate.length ; i++){
+        this.total = this.total + this.totalRate[i]
+    }
+    this.avgRate = this.total / this.totalRate.length
+
+    return this.avgRate
+  }
 
 }

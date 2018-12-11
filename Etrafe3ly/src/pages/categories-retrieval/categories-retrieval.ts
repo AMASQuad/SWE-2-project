@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase' 
+import { UserDataProvider } from '../../providers/user-data/user-data';
 /**
  * Generated class for the CategoriesRetrievalPage page.
  *
@@ -15,11 +16,17 @@ import firebase from 'firebase'
 })
 export class CategoriesRetrievalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,/* public modalCtrl: ModalController*/) {
+  //attributes
+  userDataObj:UserDataProvider;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    db:UserDataProvider
+    /* public modalCtrl: ModalController*/) {
+      this.userDataObj=db
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoriesRetrievalPage');
+    this.retrieveDataOfLawyers(this.navParams.data);
   }
 
   lawyers:any[] = [];
@@ -29,7 +36,6 @@ export class CategoriesRetrievalPage {
           this.lawyers.push(recieved)
       })
   }
-
 
   snaptoObject(snap) { // to get data from db and put it into array
     let array = [];
@@ -46,8 +52,11 @@ export class CategoriesRetrievalPage {
         console.log(this.navParams.data);
 
         //retrieva the data
-    this.retrieveDataOfLawyers(this.navParams.data);
+  }
 
+    move2Lawyer(lawyer:any){
+    this.userDataObj.lawyerData=lawyer
+    this.navCtrl.push("LawyerProfilePage")
   }
 
 }

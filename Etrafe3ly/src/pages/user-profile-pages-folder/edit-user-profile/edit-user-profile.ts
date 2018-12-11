@@ -30,7 +30,7 @@ export class EditUserProfilePage {
     console.log('ionViewDidLoad EditUserProfilePage');
   }
   updateInfoToDB(){
-    this._Database.updateInfo4User_FS(this.userDataObj.userData.uid,this.userDataObj.userData)
+    this._Database.updateInfo4User_RTDB(this.userDataObj.userData.key,this.userDataObj.userData)
   }
   
 }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { StarsRatingComponent } from './stars-rating/stars-rating';
+import { StarRatingComponent } from './star-rating/star-rating';
 @NgModule({
-	declarations: [StarsRatingComponent],
+	declarations: [StarRatingComponent],
 	imports: [],
-	exports: [StarsRatingComponent]
+	exports: [StarRatingComponent]
 })
 export class ComponentsModule {}

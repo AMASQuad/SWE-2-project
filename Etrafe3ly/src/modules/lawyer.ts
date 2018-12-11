@@ -1,5 +1,5 @@
 import { DateTime } from 'ionic-angular';
-import { rating } from './rating';
+import { Rating } from './rating';
 export class lawyer{
 
     //attributes
@@ -23,7 +23,7 @@ export class lawyer{
     bio:string;
     img:string;
     //rate
-    Rating:rating[] = [];
+    Rating:Rating[] = [];
     /*avgRating = ()=>{
         let total = 0
         this.Rating.forEach(element => {

@@ -26,7 +26,7 @@
 
    <!-- hour rate -->
    <div>
-     <div style="display:inline-block; font-size: 18px; font-weight: bold; margin-top: 5%;">Hour rate: {{this.userDataObj.userData.hourRate}}</div>
+     <div style="display:inline-block; font-size: 18px; font-weight: bold; margin-top: 5%;">Hour rate: {{this.userDataObj.lawyerData.hourRate}}</div>
      <!-- this div will get the hour rate attribute -->
      <div style="display:inline-block; color:green; font-size: 20px;">	&nbsp;20 $</div>
    </div>
@@ -53,5 +53,5 @@
   <button ion-button end *ngIf="this.userDataObj.userType == 'Users'">
       Rate
   </button>
-
+  <!--<star-rating *ngIf="this.this.userDataObj.userType == 'Users'"></star-rating><!--add rate conditionn-->
 </ion-content>

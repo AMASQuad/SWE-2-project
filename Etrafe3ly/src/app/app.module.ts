@@ -19,6 +19,7 @@ import { UserDataProvider } from '../providers/user-data/user-data';
 import { CameraProvider } from '../providers/camera/camera';
 import { DatabaseProvider } from '../providers/database/database';
 import { StarsRatingProvider } from '../providers/stars-rating/stars-rating';
+import { StarRatingComponent } from '../components/star-rating/star-rating' //first step to define component
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { StarsRatingProvider } from '../providers/stars-rating/stars-rating';
     LoginPage,
     ForgotPassPage,
     AccTypePage
+    
     //AnswerSeqQuestionPage
   ],
   imports: [

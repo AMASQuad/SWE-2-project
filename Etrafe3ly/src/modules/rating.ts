@@ -1,8 +1,9 @@
 import { user } from "./user";
 
-export interface rating{
+export interface Rating{
     key:any;
-    stars:number;
-    user:user;
+    value:number;
+    userUID:string;
+    lawyerUID:string;
     comment:string;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase'
 import { lawyerRef } from '../../modules/database.nodes';
+import { lawyer } from '../../modules/lawyer';
 /*
   Generated class for the UserDataProvider provider.
 
@@ -12,7 +13,7 @@ export class UserDataProvider {
   //attributes
   isLoggedIn:boolean = false;
   userData:any = {}
-  lawyerData:any = {}
+  lawyerData = {}
   userType:string;
   ListOfLawyers:any[] = [] //list of lawyers that used in search
   constructor() {
@@ -37,6 +38,8 @@ export class UserDataProvider {
     this.userType = '';
   }
 
+
+
   snaptoObject(snap:any) {  // to get data from db and put it into array
     let array = [];
     snap.forEach(element => {
@@ -57,7 +60,7 @@ export class UserDataProvider {
     return array[0];
   }
   
-  lawyerSearch(fn:any){
+  lawyerSearch(fn:string){
     firebase.database().ref(lawyerRef).orderByChild('firstName').equalTo(fn).on('value',(data)=>{
       if (data.exists()){
       const recieved = this.snaptoObject(data);
@@ -66,10 +69,11 @@ export class UserDataProvider {
     }
       else{
           this.ListOfLawyers = []
-          this.lawyerData = {}
+          //this.lawyerData = {}
       }
     })
   }
 
+  
 
 }
