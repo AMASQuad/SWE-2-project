@@ -36,7 +36,7 @@ export class EditlawyerProfilePage {
     this._Database.updateInfo4Lawyer_RTDB(this.userDataObj.userData.uid,this.userDataObj.userData)
   }
 
-  updateImage(){
+  selectPic(){
     this._Camera.takePhoto()
   }
 

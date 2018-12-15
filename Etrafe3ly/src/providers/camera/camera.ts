@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 export class CameraProvider {
   // attributes
   public takenPic : String
+  public imageURL : any;
   constructor(private camera:Camera) {
     console.log('Hello CameraProvider Provider');
   }
@@ -37,7 +38,6 @@ export class CameraProvider {
           let image   : string  = lawyerUID+ '.jpeg', // image name (set to = lawyer uid)
           storageRef  : any,
           parseUpload : any;
-
           return new Promise((resolve, reject) =>
       {
          storageRef       = firebase.storage().ref('Lawyers/' + image);
@@ -62,19 +62,14 @@ export class CameraProvider {
    //------------------------------get image url------------------
    getURL(uid){
       let db =firebase.storage().ref('Lawyers/'+uid+'.jpeg')
-      return db.getDownloadURL()
+      this.imageURL = db.getDownloadURL()
    }
    freeData(){
-      this.takenPic = ''
+      this.takenPic = null;
+      this.imageURL = null;
    }
-          
-          
 
-
-
-    }
-
+}
 
     
     //---------------------------
-

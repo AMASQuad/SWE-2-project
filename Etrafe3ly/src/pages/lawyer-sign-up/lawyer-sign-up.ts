@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { lawyer } from '../../modules/lawyer';
 import firebase from 'firebase';
-import {  lawyerRef, lawyersCollection } from '../../modules/database.nodes';
 import { DatabaseProvider } from '../../providers/database/database';
 import { CameraProvider } from '../../providers/camera/camera';
 //import { Camera } from '@ionic-native/camera';
@@ -37,6 +36,7 @@ export class LawyerSignUpPage {
     console.log('ionViewDidLoad LawyerSignUpPage');
   }
   Register(){
+    
     this._Database.lawyerRegister2RTDB(this.newLawyer)
   }
   //get picture

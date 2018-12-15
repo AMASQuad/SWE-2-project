@@ -94,13 +94,15 @@ lawyerRegister2RTDB(Lawyer:lawyer){
     Lawyer.uid = data.user.uid;
     Lawyer.email = null;
     Lawyer.password = null;
-    this._Camera.uploadImage(this._Camera.takenPic,Lawyer.uid)
-    Lawyer.imageURL = this._Camera.getURL(Lawyer.uid)
     ///apply this in lawyer
     const newRefKey = db.ref(lawyerRef).push()
     Lawyer.key = newRefKey.key
-    newRefKey.set(Lawyer)
 
+    this._Camera.uploadImage(this._Camera.takenPic,Lawyer.uid).then(()=>{
+      this._Camera.getURL(Lawyer.uid)
+      Lawyer.imageURL = this._Camera.imageURL
+    })
+    newRefKey.set(Lawyer)
     this._Camera.freeData()
 }).catch((err) => {
   console.log(err);//handling error
