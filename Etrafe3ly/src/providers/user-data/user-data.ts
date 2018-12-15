@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase'
-import { lawyerRef } from '../../modules/database.nodes';
+import { lawyerRef, ratingRef } from '../../modules/database.nodes';
 import { lawyer } from '../../modules/lawyer';
 /*
   Generated class for the UserDataProvider provider.
@@ -11,6 +11,10 @@ import { lawyer } from '../../modules/lawyer';
 @Injectable()
 export class UserDataProvider {
   //attributes
+
+  //avg val
+  avg = 0;
+
   isLoggedIn:boolean = false;
   userData:any = {}
   lawyerData = {}
@@ -36,6 +40,7 @@ export class UserDataProvider {
     this.lawyerData = {}
     this.isLoggedIn = false;
     this.userType = '';
+    this.avg = 0; // will be replaced with inner object attribute
   }
 
 
@@ -69,10 +74,36 @@ export class UserDataProvider {
     }
       else{
           this.ListOfLawyers = []
+          this.avg = 0;  // will be replaced with inner object attribute
           //this.lawyerData = {}
       }
     })
   }
+
+  //------------- get avg rate ----------
+  getAvgRate(lawyer:any){
+    //initialize to ensures it is free
+    let totalRate:number[] = [];
+    //-----------------
+      let totalObjects:any[] = []
+    //-------------------
+    const db = firebase.database().ref(ratingRef)
+    db.orderByChild('lawyerUID').equalTo(lawyer.uid).on('value',dataSnapshot =>{
+      totalObjects.push(this.snaptoObject(dataSnapshot))
+      for(let i = 0;i< totalObjects.length ; i++){
+        totalRate.push(totalObjects[i].value)
+      }
+      var sum = 0 ;
+    for( let i = 0; i < totalRate.length ; i++ ){
+      sum += totalRate[i]; 
+    }
+      this.avg =  sum/totalRate.length;
+      
+      //---------------finished saving data into array from db
+    }) 
+    //-----------------------looping to get total then we calculate avg rate 
+     
+  } 
 
   
 

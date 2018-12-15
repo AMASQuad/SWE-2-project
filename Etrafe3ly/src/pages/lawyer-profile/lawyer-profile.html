@@ -42,16 +42,13 @@
    </div>
 
    <!-- rating -->
-   <div style="font-size: 18px; font-weight: bold; margin-top: 5%; text-align: center;">Rating</div>
+   <div style="font-size: 18px; font-weight: bold; margin-top: 5%; text-align: center;">Rating : {{this.avgRate}}</div>
 
    <button ion-button end (click)='deleteAcc()' *ngIf="this.userDataObj.userType == 'Lawyers'">
     Delete Account
   </button>
-  <button ion-button end  *ngIf="this.userDataObj.userType == 'Users'">
-    Book
-  </button>
   <button ion-button end *ngIf="this.userDataObj.userType == 'Users'">
-      Rate
+      book
   </button>
-  <star-rating *ngIf="this.userDataObj.userType == 'Users'"></star-rating><!--add rate conditionn-->
+  <star-rating *ngIf="check()"></star-rating><!--add rate conditionn-->
 </ion-content>

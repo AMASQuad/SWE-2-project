@@ -34,7 +34,7 @@ export class SearchModalPage {
     this.navCtrl.pop();
   }
   //move to lawyer page
-  move2Lawyer(lawyer){
+  move2Lawyer(lawyer:any){
     this.userDataObj.lawyerData=lawyer
     this.navCtrl.push("LawyerProfilePage")
   }

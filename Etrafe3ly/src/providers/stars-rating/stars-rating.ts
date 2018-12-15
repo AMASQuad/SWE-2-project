@@ -13,14 +13,14 @@ export class StarsRatingProvider {
    }
   //get user Rating
   getUserRating(userID){
-    const starRef = firebase.firestore().collection('Rating').where('uid','==',userID)
+    const starRef = firebase.firestore().collection('Rating').where('userUID','==',userID)
     .get()
     return starRef
   }
 
   //get lawyer rating
   getLawyerRating(lawyerID){
-    const starRef = firebase.firestore().collection('Rating').where('uid','==',lawyerID)
+    const starRef = firebase.firestore().collection('Rating').where('lawyerUID','==',lawyerID)
     .get()
     return starRef
   }
@@ -39,11 +39,21 @@ export class StarsRatingProvider {
 //----------------------owncode---------------------
   //for realtime DB -->>Save rate that user submits in component
   comment:string;
-  
-  SetUserRate4Lawyer(uid,lid,comment){
-     // const rateObj = 
-     // this._Database.saveRateTORTDB(rate)
+  rateVal:number;
 
+  
+  SetUserRate4Lawyer(user,lawyer){
+    const ratingObj = {} as Rating;
+     ratingObj.userUID = user.uid;
+     ratingObj.lawyerUID = lawyer.uid;
+     ratingObj.value = this.rateVal
+     ratingObj.comment = this.comment
+    // call db function to save rate
+    this._Database.saveRateTORTDB(ratingObj)
+
+    //free data from this service
+    this.comment = null
+    this.rateVal = null
   }
 
 }

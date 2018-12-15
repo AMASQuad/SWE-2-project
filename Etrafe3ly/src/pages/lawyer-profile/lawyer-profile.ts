@@ -4,7 +4,8 @@ import firebase from 'firebase'
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { HomePage } from '../home/home';
 import { AlertController } from 'ionic-angular';
-import { lawyerRef } from '../../modules/database.nodes';
+import { lawyerRef, ratingRef } from '../../modules/database.nodes';
+import { DatabaseProvider } from '../../providers/database/database';
 
 @IonicPage()
 @Component({
@@ -14,13 +15,18 @@ import { lawyerRef } from '../../modules/database.nodes';
 export class LawyerProfilePage {
   //get data from service
   userDataObj:UserDataProvider;
+  dbService:DatabaseProvider;
+  avgRate:number = 0;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,db:UserDataProvider,
-    public alerCtrl:AlertController) {
+    public alerCtrl:AlertController,_Database:DatabaseProvider) {
     this.userDataObj = db;
+    this.dbService = _Database
   }
 
   ionViewDidLoad() {
-
+    this.avgRate = 0; // to set again avg to zero
+    //this.getAvgRate()
   }
 
   /*getRating(){
@@ -55,5 +61,36 @@ deleteAcc(){
     // error handling
   })
 }
+//check for rate applied or not 
+check(){
+  this.dbService.checkRatedOrNot(this.userDataObj.userData,this.userDataObj.lawyerData)
+}
+   
+//get avg rate
+/*
+getAvgRate(){
+  //initialize to ensures it is free
+  let totalRate:number[] = [];
+  //-----------------
+   
+    let totalObjects:any[] = []
+  //-------------------
+  const db = firebase.database().ref(ratingRef)
+  db.orderByChild('lawyerUID').equalTo(this.userDataObj.lawyerData.uid).on('value',dataSnapshot =>{
+    totalObjects.push(this.dbService.snaptoObject(dataSnapshot))
+    for(let i = 0;i< totalObjects.length ; i++){
+      totalRate.push(totalObjects[i].value)
+    }
+    var sum = 0 ;
+  for( let i = 0; i < totalRate.length ; i++ ){
+    sum += totalRate[i]; 
+  }
+   this.avgRate = sum/totalRate.length;
+    
+    //---------------finished saving data into array from db
+  }) 
+  //-----------------------looping to get total then we calculate avg rate 
+   
+}*/
 
 }

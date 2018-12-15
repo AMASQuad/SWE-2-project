@@ -25,7 +25,7 @@
                 
             </ion-item>
             <ion-item>
-                <ion-textarea  placeholder="Leave a comment" #cmt (click)='commentHandler(cmt.value)' style="height:80px"></ion-textarea>
+                <ion-textarea  placeholder="Leave a comment"  [(ngModel)]="this.rateService.comment" style="height:80px"></ion-textarea>
             </ion-item>
-            
+            <button ion-button (click)='Rate()'>Rate</button>
 </ion-card>

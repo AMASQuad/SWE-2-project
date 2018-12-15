@@ -23,15 +23,9 @@ export class lawyer{
     bio:string;
     img:string;
     //rate
-    Rating:Rating[] = [];
-    /*avgRating = ()=>{
-        let total = 0
-        this.Rating.forEach(element => {
-            total += element.stars
+    totalRate:number;
+    avgRate:number;
 
-        })
-        return total / this.Rating.length
-    }
-*/
-    //constant to store data
+    //image
+    imageURL:any;
 }

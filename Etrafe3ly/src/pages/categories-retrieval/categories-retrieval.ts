@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase' 
 import { UserDataProvider } from '../../providers/user-data/user-data';
+import { DatabaseProvider } from '../../providers/database/database';
 /**
  * Generated class for the CategoriesRetrievalPage page.
  *
@@ -18,6 +19,7 @@ export class CategoriesRetrievalPage {
 
   //attributes
   userDataObj:UserDataProvider;
+  _Database:DatabaseProvider
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     db:UserDataProvider
@@ -58,5 +60,7 @@ export class CategoriesRetrievalPage {
     this.userDataObj.lawyerData=lawyer
     this.navCtrl.push("LawyerProfilePage")
   }
-
+  //
+  
+  
 }

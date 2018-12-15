@@ -5,6 +5,7 @@ import { usersCollection, lawyersCollection, lawyerRef, userRef, ratingRef } fro
 import { lawyer } from '../../modules/lawyer';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { Rating } from '../../modules/rating';
+import { CameraProvider } from '../camera/camera';
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -14,8 +15,10 @@ import { Rating } from '../../modules/rating';
 */
 @Injectable()
 export class DatabaseProvider {
-
-    constructor(private camera:Camera) {
+    //attributes
+    _Camera:CameraProvider;
+    constructor(private camera:CameraProvider) {
+      this._Camera = camera;
     firebase.firestore().settings({timestampsInSnapshots: true})
   }
   //---------------user Registration using firebase storage (firestore)-----------------
@@ -91,10 +94,14 @@ lawyerRegister2RTDB(Lawyer:lawyer){
     Lawyer.uid = data.user.uid;
     Lawyer.email = null;
     Lawyer.password = null;
+    this._Camera.uploadImage(this._Camera.takenPic,Lawyer.uid)
+    Lawyer.imageURL = this._Camera.getURL(Lawyer.uid)
     ///apply this in lawyer
     const newRefKey = db.ref(lawyerRef).push()
     Lawyer.key = newRefKey.key
     newRefKey.set(Lawyer)
+
+    this._Camera.freeData()
 }).catch((err) => {
   console.log(err);//handling error
 })
@@ -113,6 +120,7 @@ updateInfo4User_RTDB(key,data){
 
 //------------------------------update lawyer info---------------
 updateInfo4Lawyer_RTDB(key,data){
+  this._Camera.uploadImage(this._Camera.takenPic,key) 
   firebase.database().ref(lawyerRef+'/'+key).set(data)
 }
 //-------------------------------------
@@ -160,7 +168,7 @@ updateInfo4Lawyer_FS(key,data){
 picData:any;
 picURL:any;
 myPicRef = firebase.storage().ref('/')
-
+/*
 takePic(uid){
   //destnation
 //  try{
@@ -189,7 +197,7 @@ takePic(uid){
 //    catch(err){
 //        console.log(err)
 //    }
-}
+}*/
 
 uploadPic(uid){
   this.myPicRef.child(uid).child('image.jpeg')
@@ -204,36 +212,55 @@ uploadPic(uid){
 saveRateTORTDB(rate:Rating){  
       const db = firebase.database().ref(ratingRef)
       //apply this in lawyer
-      const newRefKey = db.push()
-      newRefKey.key = rate.userUID+'_'+rate.lawyerUID //setting key 
-      rate.key = newRefKey.key //saving key
-      newRefKey.set(rate)
+      const ratingkey = rate.userUID+'_'+rate.lawyerUID //setting key 
+      db.child(ratingkey).set(rate)
+  }
+//search whether user rated this lawyer or not
+  checkRatedOrNot(user,lawyer){
+    //get user and lawyer uid 
+    const rateKey = user.uid+'_'+lawyer.uid
+    
+    //query on db to check if exists or not and if exists return false , if not then true
+
+    const db = firebase.database().ref(ratingRef)
+
+    if(db.child(rateKey).toString() != 'undefined'){
+        return false;
+    }
+    else{
+        return true;
+    }
+
+
+
   }
 
   // retrieve avg rate from database (realtime database)
-  totalRate:any = []
-  total = 0
-  avgRate:number;
 
-  getAvgRate(lawyerUID:string){
-    //initialize to ensures it is free
-    this.totalRate = []
-    this.total = 0;
-    this.avgRate = 0; 
-    //-----------------
-    const db = firebase.database().ref(ratingRef)
-    db.orderByChild('lawyerID').equalTo(lawyerUID).on('child_added',dataSnapshot =>{
-      dataSnapshot.forEach(element => {
-        this.totalRate.push(dataSnapshot.val().value)
-      });//---------------finished saving data into array from db
-    })
-    //-----------------------looping to get total then we calculate avg rate 
-  for ( let i = 0;i< this.totalRate.length ; i++){
-        this.total = this.total + this.totalRate[i]
+  //get avg rate
+getAvgRate(lawyer:any){
+  //initialize to ensures it is free
+  let totalRate:number[] = [];
+  //-----------------
+    let totalObjects:any[] = []
+  //-------------------
+  const db = firebase.database().ref(ratingRef)
+  db.orderByChild('lawyerUID').equalTo(lawyer.uid).on('value',dataSnapshot =>{
+    totalObjects.push(this.snaptoObject(dataSnapshot))
+    for(let i = 0;i< totalObjects.length ; i++){
+      totalRate.push(totalObjects[i].value)
     }
-    this.avgRate = this.total / this.totalRate.length
-
-    return this.avgRate
+    var sum = 0 ;
+  for( let i = 0; i < totalRate.length ; i++ ){
+    sum += totalRate[i]; 
   }
+    return sum/totalRate.length;
+    
+    //---------------finished saving data into array from db
+  }) 
+  //-----------------------looping to get total then we calculate avg rate 
+   
+} 
+  
 
 }

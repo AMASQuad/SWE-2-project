@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Camera ,CameraOptions } from '@ionic-native/camera';
+import firebase from 'firebase'
 import 'rxjs/add/operator/map';
 /*
   Generated class for the CameraProvider provider.
@@ -10,16 +11,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CameraProvider {
   // attributes
-  public cameraImage : String
+  public takenPic : String
   constructor(private camera:Camera) {
     console.log('Hello CameraProvider Provider');
   }
 
-  selectImage() : Promise<any>
-  {
-     return new Promise(resolve =>
-     {
-        let cameraOptions : CameraOptions = {
+  takePhoto(){
+        const options : CameraOptions = {
             sourceType         : this.camera.PictureSourceType.PHOTOLIBRARY,
             destinationType    : this.camera.DestinationType.DATA_URL,
             quality            : 100,
@@ -29,15 +27,54 @@ export class CameraProvider {
             correctOrientation : true
         };
 
-        this.camera.getPicture(cameraOptions)
+        this.camera.getPicture(options)
         .then((data) =>
         {
-           this.cameraImage 	= "data:image/jpeg;base64," + data;
-           resolve(this.cameraImage);
-        });
+           this.takenPic 	= "data:image/jpeg;base64," + data;          
+        }).catch(err=>{console.log(err)});
+     }
+     uploadImage(imageString,lawyerUID) : Promise<any> {
+          let image   : string  = lawyerUID+ '.jpeg', // image name (set to = lawyer uid)
+          storageRef  : any,
+          parseUpload : any;
+
+          return new Promise((resolve, reject) =>
+      {
+         storageRef       = firebase.storage().ref('Lawyers/' + image);
+         parseUpload      = storageRef.putString(imageString, 'data_url');
+
+         parseUpload.on('state_changed', (_snapshot) =>
+         {
+            // We could log the progress here IF necessary
+            // console.log('snapshot progess ' + _snapshot);
+         },
+         (_err) =>
+         {
+            reject(_err);
+         },
+         (success) =>
+         {
+            resolve(parseUpload.snapshot);
+         });
+      });
+   }
+
+   //------------------------------get image url------------------
+   getURL(uid){
+      let db =firebase.storage().ref('Lawyers/'+uid+'.jpeg')
+      return db.getDownloadURL()
+   }
+   freeData(){
+      this.takenPic = ''
+   }
+          
+          
 
 
-     });
+
     }
+
+
+    
     //---------------------------
-}
+

@@ -4,6 +4,7 @@ import { lawyer } from '../../modules/lawyer';
 import firebase from 'firebase';
 import {  lawyerRef, lawyersCollection } from '../../modules/database.nodes';
 import { DatabaseProvider } from '../../providers/database/database';
+import { CameraProvider } from '../../providers/camera/camera';
 //import { Camera } from '@ionic-native/camera';
 //import { ToastController } from 'ionic-angular';
 
@@ -25,9 +26,11 @@ export class LawyerSignUpPage {
   //creating object from lawyer class
   newLawyer = new lawyer();
   _Database:DatabaseProvider;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  camProv:CameraProvider;
+  constructor(public navCtrl: NavController, public navParams: NavParams,cp:CameraProvider,
      db:DatabaseProvider) {
       this._Database=db;
+      this.camProv = cp
   }
 
   ionViewDidLoad() {
@@ -37,7 +40,9 @@ export class LawyerSignUpPage {
     this._Database.lawyerRegister2RTDB(this.newLawyer)
   }
   //get picture
-
+  getPic(){
+    this.camProv.takePhoto()
+  }
   /*imagePath='';
   openGallery(){
     this.camera.getPicture({

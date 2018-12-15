@@ -4,6 +4,7 @@ import { UserDataProvider } from '../../providers/user-data/user-data';
 import firebase from 'firebase'
 
 import { DatabaseProvider } from '../../providers/database/database';
+import { CameraProvider } from '../../providers/camera/camera';
 /**
  * Generated class for the EditlawyerProfilePage page.
  *
@@ -20,8 +21,10 @@ export class EditlawyerProfilePage {
   //attributes
   userDataObj:UserDataProvider;
   _Database:DatabaseProvider;
+  _Camera:CameraProvider;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    db:UserDataProvider,dbService:DatabaseProvider) {
+    db:UserDataProvider,dbService:DatabaseProvider,camera:CameraProvider) {
+      this._Camera = camera
       this.userDataObj = db;
       this._Database = dbService
   }
@@ -31,6 +34,10 @@ export class EditlawyerProfilePage {
   }
   updateInfoToDB(){
     this._Database.updateInfo4Lawyer_RTDB(this.userDataObj.userData.uid,this.userDataObj.userData)
+  }
+
+  updateImage(){
+    this._Camera.takePhoto()
   }
 
   

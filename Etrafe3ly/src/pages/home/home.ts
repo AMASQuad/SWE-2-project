@@ -45,16 +45,13 @@ logout(){
   this.userDataObj.freeData(); // free data from service
 }
 
-
   //search page
   presentModal() {
     const modal = this.modalCtrl.create('SearchModalPage');
     modal.present();
   }
-  test(){
-    console.log(this.userDataObj.lawyerData)
-  }
-      
+  
+
 
 
 }
