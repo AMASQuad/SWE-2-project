@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase'
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { HomePage } from '../home/home';
 import { AlertController } from 'ionic-angular';
-import { lawyerRef, ratingRef } from '../../modules/database.nodes';
+import { lawyerRef } from '../../modules/database.nodes';
 import { DatabaseProvider } from '../../providers/database/database';
 
 @IonicPage()

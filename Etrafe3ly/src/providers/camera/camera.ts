@@ -13,6 +13,7 @@ export class CameraProvider {
   // attributes
   public takenPic : String
   public imageURL : any;
+  imageRef : any;
   constructor(private camera:Camera) {
     console.log('Hello CameraProvider Provider');
   }
@@ -63,10 +64,13 @@ export class CameraProvider {
    getURL(uid){
       let db =firebase.storage().ref('Lawyers/'+uid+'.jpeg')
       this.imageURL = db.getDownloadURL()
+      this.imageRef = db.fullPath
+      
    }
    freeData(){
-      this.takenPic = null;
-      this.imageURL = null;
+      this.takenPic = '';
+      this.imageURL = '';
+      this.imageRef = ''
    }
 
 }

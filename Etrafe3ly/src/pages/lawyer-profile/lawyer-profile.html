@@ -17,7 +17,7 @@
 
   <div>
 <!-- profile photo -->
-<img src="../../assets/imgs/user.png" class="profilePhoto">
+<img [src]="this.userDataObj.lawyerData" class="profilePhoto">
 
 <!-- first + last name div using attribute binding-->
 <div class="name"> Hello ,{{this.userDataObj.lawyerData.firstName}}</div> </div>

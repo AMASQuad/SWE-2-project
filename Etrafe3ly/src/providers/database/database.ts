@@ -17,7 +17,7 @@ import { CameraProvider } from '../camera/camera';
 export class DatabaseProvider {
     //attributes
     _Camera:CameraProvider;
-    constructor(private camera:CameraProvider) {
+    constructor(camera:CameraProvider) {
       this._Camera = camera;
     firebase.firestore().settings({timestampsInSnapshots: true})
   }
@@ -78,6 +78,7 @@ snaptoObject(snap) { // to get data from db and put it into array
     //apply this in lawyer
     const newRefKey = db.ref(userRef).push()
     User.key = newRefKey.key
+    
     newRefKey.set(User)
     //---------
 }).catch((err) => {
@@ -95,15 +96,23 @@ lawyerRegister2RTDB(Lawyer:lawyer){
     Lawyer.email = null;
     Lawyer.password = null;
     ///apply this in lawyer
+    this._Camera.uploadImage(this._Camera.takenPic,Lawyer.uid) //<<here
+    this._Camera.getURL(Lawyer.uid) //Here <<
+    
+
     const newRefKey = db.ref(lawyerRef).push()
     Lawyer.key = newRefKey.key
 
-    this._Camera.uploadImage(this._Camera.takenPic,Lawyer.uid).then(()=>{
-      this._Camera.getURL(Lawyer.uid)
-      Lawyer.imageURL = this._Camera.imageURL
-    })
+    Lawyer.imageURL = this._Camera.imageRef//<<here
+
     newRefKey.set(Lawyer)
-    this._Camera.freeData()
+    
+        
+    
+    
+    
+    
+    /*this._Camera.freeData()*/
 }).catch((err) => {
   console.log(err);//handling error
 })
@@ -122,8 +131,12 @@ updateInfo4User_RTDB(key,data){
 
 //------------------------------update lawyer info---------------
 updateInfo4Lawyer_RTDB(key,data){
-  this._Camera.uploadImage(this._Camera.takenPic,key) 
-  firebase.database().ref(lawyerRef+'/'+key).set(data)
+  
+  let db = firebase.database().ref(lawyerRef+'/'+key)
+      
+      db.set(data).then(()=>{
+        this._Camera.uploadImage(this._Camera.takenPic,key) 
+      })
 }
 //-------------------------------------
 

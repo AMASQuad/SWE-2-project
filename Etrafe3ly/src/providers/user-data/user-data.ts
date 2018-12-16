@@ -31,6 +31,7 @@ export class UserDataProvider {
     }
     else{
       this.lawyerData = data
+      
     }
     this.isLoggedIn = true;
     
