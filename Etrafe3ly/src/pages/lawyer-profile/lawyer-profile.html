@@ -17,7 +17,7 @@
 
   <div>
 <!-- profile photo -->
-<img [src]="this.userDataObj.lawyerData" class="profilePhoto">
+<img [src]="this.userDataObj.lawyerData.imageURL" class="profilePhoto">
 
 <!-- first + last name div using attribute binding-->
 <div class="name"> Hello ,{{this.userDataObj.lawyerData.firstName}}</div> </div>
@@ -50,5 +50,7 @@
   <button ion-button end *ngIf="this.userDataObj.userType == 'Users'">
       book
   </button>
+
+  
   <star-rating *ngIf="check()"></star-rating><!--add rate conditionn-->
 </ion-content>

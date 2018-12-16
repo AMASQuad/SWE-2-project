@@ -65,7 +65,7 @@ deleteAcc(){
 check(){
   this.dbService.checkRatedOrNot(this.userDataObj.userData,this.userDataObj.lawyerData)
 }
-   
+ 
 //get avg rate
 /*
 getAvgRate(){

@@ -27,5 +27,5 @@ export class lawyer{
     avgRate:number;
 
     //image
-    imageURL:any;
+    imageURL:string;
 }

@@ -23,8 +23,8 @@ export class EditlawyerProfilePage {
   _Database:DatabaseProvider;
   _Camera:CameraProvider;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    db:UserDataProvider,dbService:DatabaseProvider,camera:CameraProvider) {
-      this._Camera = camera
+    db:UserDataProvider,dbService:DatabaseProvider,private camera:CameraProvider) {
+      this._Camera = this.camera
       this.userDataObj = db;
       this._Database = dbService
   }
@@ -36,9 +36,12 @@ export class EditlawyerProfilePage {
     this._Database.updateInfo4Lawyer_RTDB(this.userDataObj.userData.uid,this.userDataObj.userData)
   }
 
-  selectPic(){
+  select(){
     this._Camera.takePhoto()
   }
 
+  update(){
+    this._Database.updateImageLawyerFStorage(this.userDataObj.lawyerData)
+  }
   
 }

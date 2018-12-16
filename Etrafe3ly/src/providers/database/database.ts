@@ -3,9 +3,9 @@ import firebase from 'firebase';
 import { user } from '../../modules/user';
 import { usersCollection, lawyersCollection, lawyerRef, userRef, ratingRef } from '../../modules/database.nodes';
 import { lawyer } from '../../modules/lawyer';
-import { CameraOptions, Camera } from '@ionic-native/camera';
 import { Rating } from '../../modules/rating';
 import { CameraProvider } from '../camera/camera';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -17,7 +17,8 @@ import { CameraProvider } from '../camera/camera';
 export class DatabaseProvider {
     //attributes
     _Camera:CameraProvider;
-    constructor(camera:CameraProvider) {
+    
+    constructor(private camera:CameraProvider,private toastCtrl:ToastController) {
       this._Camera = camera;
     firebase.firestore().settings({timestampsInSnapshots: true})
   }
@@ -78,7 +79,6 @@ snaptoObject(snap) { // to get data from db and put it into array
     //apply this in lawyer
     const newRefKey = db.ref(userRef).push()
     User.key = newRefKey.key
-    
     newRefKey.set(User)
     //---------
 }).catch((err) => {
@@ -91,28 +91,40 @@ snaptoObject(snap) { // to get data from db and put it into array
 //------------------------lawyer Registration using firebase realtime database-----------------
 lawyerRegister2RTDB(Lawyer:lawyer){
   firebase.auth().createUserWithEmailAndPassword(Lawyer.email,Lawyer.password).then((data)=>{
-    const db = firebase.database() 
-    Lawyer.uid = data.user.uid;
-    Lawyer.email = null;
-    Lawyer.password = null;
-    ///apply this in lawyer
-    this._Camera.uploadImage(this._Camera.takenPic,Lawyer.uid) //<<here
-    this._Camera.getURL(Lawyer.uid) //Here <<
-    
+    const dbRef = firebase.database()
+   // let image : string  = Lawyer.uid + '.jpeg'// image name and extension
+   // const storageRef = firebase.storage().ref('Lawyers/'+image)
+    Lawyer.uid = data.user.uid
+    Lawyer.email = Lawyer.password = null
 
-    const newRefKey = db.ref(lawyerRef).push()
+    //upload image and get its url and save it in lawyer object
+
+   /* storageRef.putString(this._Camera.imagePath,firebase.storage.StringFormat.DATA_URL)
+    .then( (url)=>{
+       Lawyer.imageURL = url
+       this.toastCtrl.create({
+          message:`Lawyer.imageURL = url`,
+          showCloseButton:true
+       }).present()
+    }).catch( err=>{
+       this.toastCtrl.create({
+          message:`Error happened in uploadPic() and its content : ${err}`,
+          showCloseButton:true
+       }).present()
+    })*/
+
+
+    //push data to database
+
+    let newRefKey = dbRef.ref(lawyerRef).push()
     Lawyer.key = newRefKey.key
+    newRefKey.set(Lawyer).then( ()=>{
+      this.toastCtrl.create({
+        message:`pushed data to db`,
+        showCloseButton:true
+     }).present()
+    })
 
-    Lawyer.imageURL = this._Camera.imageRef//<<here
-
-    newRefKey.set(Lawyer)
-    
-        
-    
-    
-    
-    
-    /*this._Camera.freeData()*/
 }).catch((err) => {
   console.log(err);//handling error
 })
@@ -132,13 +144,48 @@ updateInfo4User_RTDB(key,data){
 //------------------------------update lawyer info---------------
 updateInfo4Lawyer_RTDB(key,data){
   
-  let db = firebase.database().ref(lawyerRef+'/'+key)
+  const db = firebase.database().ref(lawyerRef+'/'+key)
+  db.set(data).then( ()=>{
+    this.toastCtrl.create({message: `user updated`,showCloseButton:true}).present()
+  })
       
-      db.set(data).then(()=>{
-        this._Camera.uploadImage(this._Camera.takenPic,key) 
-      })
 }
 //-------------------------------------
+//image submission
+updateImageLawyerFStorage(Lawyer){
+  this._Camera.uploadImage(this._Camera.takenPic,Lawyer.uid).then( (data)=>{
+    this.toastCtrl.create({
+      message:`success`,
+      position:'top',
+      showCloseButton:true
+    }).present()
+    this.getImage(Lawyer)
+    Lawyer.imageURL = this.tempUrl
+    this.toastCtrl.create({message: `update 1 lawyer image url${Lawyer.imageURL}`,showCloseButton:true}).present()
+    
+  }).catch( err =>{
+    this.toastCtrl.create({
+      message:`err : ${err}`,
+      position:'top',
+      showCloseButton:true
+    }).present()
+  })
+  this.toastCtrl.create({message: `update 2 lawyer image url ${Lawyer.imageURL}`,showCloseButton:true}).present()
+  this.updateInfo4Lawyer_RTDB(Lawyer.key,Lawyer)
+  this._Camera.freeData()
+}
+//----------------------------------
+
+tempUrl:string; //var to get image url and store it in lawyer account
+getImage(Lawyer){
+  let storageRef = firebase.storage().ref('Lawyers/'+Lawyer.uid+'.jpeg')
+  storageRef.getDownloadURL()
+  .then( (data)=> {this.tempUrl = data
+              this.toastCtrl.create({message: `temp url ${this.tempUrl}`, showCloseButton:true,position:'mid'}).present()
+  })
+  .catch( err =>{ console.log(err)})
+}
+
 
 //------------------update user info---------------------
 updateInfo4User_FS(key,data){
