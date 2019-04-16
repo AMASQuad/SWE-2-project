@@ -57,6 +57,7 @@ export class LoginPage {
           if (data.exists()){
          const userData = this.userDataObj.snaptoObject(data);
           this.userDataObj.collectData(userData,lawyerRef) // store data in service
+          
           this.navCtrl.setRoot(HomePage).then(()=>{
             //lawyer logged in
 

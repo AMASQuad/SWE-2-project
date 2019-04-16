@@ -23,8 +23,9 @@ export class lawyer{
     bio:string;
     img:string;
     //rate
-    totalRate:number;
-    avgRate:number;
+    totalRate:number = 0;
+    totalPeopleRated:number = 0;
+    avgRate:number = 0;
 
     //image
     imageURL:string;

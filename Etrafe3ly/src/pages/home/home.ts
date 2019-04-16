@@ -28,7 +28,7 @@ export class HomePage {
   modalCtrl:ModalController;
 
   ionViewDidLoad() {
-  
+    
   }
   //this function is here just so i can reach the lawyer profile page
   goToProfile(){
@@ -51,6 +51,9 @@ logout(){
     modal.present();
   }
   
+  loadTopRated(){
+    
+  }
 
 
 

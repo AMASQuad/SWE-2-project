@@ -6,6 +6,7 @@ import { lawyer } from '../../modules/lawyer';
 import { Rating } from '../../modules/rating';
 import { CameraProvider } from '../camera/camera';
 import { ToastController } from 'ionic-angular';
+import { HomePage } from '../../pages/home/home';
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -79,7 +80,14 @@ snaptoObject(snap) { // to get data from db and put it into array
     //apply this in lawyer
     const newRefKey = db.ref(userRef).push()
     User.key = newRefKey.key
-    newRefKey.set(User)
+    newRefKey.set(User).then( ()=>{
+      //lawyer registered-->
+      //this.navCtrl.setRoot(HomePage)
+      this.toastCtrl.create({
+        message:`User Registered`,
+        showCloseButton:true
+     }).present()
+    })
     //---------
 }).catch((err) => {
   console.log(err);//handling error
@@ -95,7 +103,7 @@ lawyerRegister2RTDB(Lawyer:lawyer){
    // let image : string  = Lawyer.uid + '.jpeg'// image name and extension
    // const storageRef = firebase.storage().ref('Lawyers/'+image)
     Lawyer.uid = data.user.uid
-    Lawyer.email = Lawyer.password = null
+    Lawyer.password = null
 
     //upload image and get its url and save it in lawyer object
 
@@ -119,8 +127,10 @@ lawyerRegister2RTDB(Lawyer:lawyer){
     let newRefKey = dbRef.ref(lawyerRef).push()
     Lawyer.key = newRefKey.key
     newRefKey.set(Lawyer).then( ()=>{
+      //lawyer registered-->
+      //this.navCtrl.setRoot(HomePage)
       this.toastCtrl.create({
-        message:`pushed data to db`,
+        message:`Lawyer Registered`,
         showCloseButton:true
      }).present()
     })
@@ -316,13 +326,34 @@ getAvgRate(lawyer:any){
   for( let i = 0; i < totalRate.length ; i++ ){
     sum += totalRate[i]; 
   }
+    //submit to for lawyer by uid
+    firebase.database().ref()//new added
+    .child(lawyerRef).orderByChild('uid').equalTo(lawyer.uid).ref.set({avgRate: sum/totalRate.length}) // new aded
     return sum/totalRate.length;
     
     //---------------finished saving data into array from db
   }) 
   //-----------------------looping to get total then we calculate avg rate 
-   
-} 
   
+} 
+//retrieve top rated lawyers
+
+topRated:any[] = []
+getTopRated(){
+// will retrieve rated lawyers with 5 
+  const lawyersRef = firebase.database().ref(lawyerRef) // to retrieve lawyer info
+  
+  lawyersRef.orderByChild('avgRate').equalTo(5).on('child_added',(data)=>{
+    if(data.exists()){
+      const recieved = this.snaptoObject(data);
+      this.topRated.push(recieved)
+    }
+    else{
+      this.topRated = []
+    }
+  })
+  
+
+}
 
 }

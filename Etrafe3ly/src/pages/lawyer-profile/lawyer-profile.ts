@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase'
 import { UserDataProvider } from '../../providers/user-data/user-data';
@@ -64,8 +64,31 @@ deleteAcc(){
 //check for rate applied or not 
 check(){
   this.dbService.checkRatedOrNot(this.userDataObj.userData,this.userDataObj.lawyerData)
+}//************************************************************* */
+/*Email */
+
+
+/*sendEmail(Lawyer){
+  this.emailComposer.isAvailable().then((available: boolean) =>{
+    if(available) {
+      //Now we know we can send
+    }
+   });
+   
+   let email = {
+     to: `${Lawyer.email}`,
+     subject: 'Appointment Reservation',
+     body: `How are you? A new Reservation from ${this.userDataObj.userData.firstName} and
+            its number : ${this.userDataObj.userData.phone}.`,//content of the email
+     isHtml: true
+   };
+   
+   // Send a text message using default options
+   this.emailComposer.open(email);
+   
 }
- 
+*/
+//*************************************************************** */
 //get avg rate
 /*
 getAvgRate(){
